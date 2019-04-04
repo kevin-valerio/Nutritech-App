@@ -22,14 +22,15 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
 
         _emailText = findViewById(R.id.input_email);
         _passwordText = findViewById(R.id.input_password);
         _loginButton = findViewById(R.id.btn_login);
         _signupLink = findViewById(R.id.link_signup);
-
-        setContentView(R.layout.activity_login);
 
 
         _loginButton.setOnClickListener(new View.OnClickListener() {
@@ -64,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
 
         final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this, R.style.AppTheme_Dark_Dialog);
         progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Authenticating...");
+        progressDialog.setMessage("Connection...");
         progressDialog.show();
 
         String email = _emailText.getText().toString();
@@ -75,9 +76,7 @@ public class LoginActivity extends AppCompatActivity {
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
-                        // On complete call either onLoginSuccess or onLoginFailed
                         onLoginSuccess();
-                        // onLoginFailed();
                         progressDialog.dismiss();
                     }
                 }, 3000);
@@ -98,7 +97,6 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        // Disable going back to the MainActivity
         moveTaskToBack(true);
     }
 
@@ -108,8 +106,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onLoginFailed() {
-        Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
-
+        Toast.makeText(getBaseContext(), "La connection a échoué", Toast.LENGTH_LONG).show();
         _loginButton.setEnabled(true);
     }
 
@@ -120,14 +117,14 @@ public class LoginActivity extends AppCompatActivity {
         String password = _passwordText.getText().toString();
 
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            _emailText.setError("enter a valid email address");
+            _emailText.setError("Veuillez entrer une adresse mail valide");
             valid = false;
         } else {
             _emailText.setError(null);
         }
 
-        if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
-            _passwordText.setError("between 4 and 10 alphanumeric characters");
+        if (password.isEmpty() || password.length() < 4) {
+            _passwordText.setError("Le mot de passe doit avoir au moins 4 caratères");
             valid = false;
         } else {
             _passwordText.setError(null);
