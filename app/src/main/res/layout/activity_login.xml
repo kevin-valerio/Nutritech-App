@@ -14,6 +14,19 @@
 
 
         <!--  Email Label -->
+        <!--android:layout_height="wrap_content"-->
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+
+            android:layout_height="72dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="24dp"
+            android:elegantTextHeight="false"
+            android:text="@string/nutritech"
+            android:textAlignment="center"
+            android:textSize="36sp" />
+
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

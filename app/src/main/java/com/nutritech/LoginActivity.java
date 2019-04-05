@@ -106,7 +106,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onLoginFailed() {
-        Toast.makeText(getBaseContext(), "La connection a échoué", Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseContext(), "Votre adresse mail et votre mot de passe ne correspondent pas", Toast.LENGTH_LONG).show();
         _loginButton.setEnabled(true);
     }
 

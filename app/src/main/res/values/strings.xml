@@ -15,7 +15,13 @@
     <string name="se_connecter">Se connecter</string>
     <string name="pas_de_compte_cr_ez_en_un">Pas de compte ? Créez-en un !</string>
     <string name="mot_de_passe">Mot de passe</string>
-    <string name="adresse_mail">Adresse mail</string>
     <string name="homme">Homme</string>
     <string name="femme">Femme</string>
+    <string name="logo">Logo</string>
+    <string name="nutritech">Nutritech</string>
+    <string name="date_de_naissance">Date de naissance</string>
+    <string name="d_j_enregistr_connectez_vous">Déjà enregistré ? Connectez-vous !</string>
+    <string name="adresse_mail">Adresse mail</string>
+    <string name="confirmez_votre_mot_de_passe">Confirmez votre mot de passe</string>
+    <string name="title_activity_dashboard">DashboardActivity</string>
 </resources>

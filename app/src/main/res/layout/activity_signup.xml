@@ -1,26 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:fitsSystemWindows="true">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="56dp"
+        android:orientation="vertical"
         android:paddingLeft="24dp"
+        android:paddingTop="56dp"
         android:paddingRight="24dp">
 
+        <ImageView
+            android:layout_width="251dp"
+            android:layout_height="104dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="24dp"
+            android:src="@mipmap/nutritech_logo"
+            app:srcCompat="@mipmap/nutritech_logo" />
 
+        <!--  Name Label -->
 
-        <!-- Name Label -->
-
-        <!-- Address Label -->
-
-
-        <!--  Email Label -->
+        <!-- Email Label -->
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -31,54 +34,11 @@
                 android:id="@+id/input_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Adresse mail"
+                android:hint="@string/adresse_mail"
                 android:inputType="textEmailAddress" />
         </android.support.design.widget.TextInputLayout>
 
-
-        <!-- mobile number -->
-        <EditText
-            android:id="@+id/editText3"
-            android:layout_width="363dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Age"
-            android:inputType="numberSigned" />
-
-        <Spinner
-            android:id="@+id/spinner"
-            android:layout_width="362dp"
-            android:layout_height="wrap_content"
-            android:entries="@string/femme"
-            android:spinnerMode="dropdown" />
-
-        <Spinner
-            android:id="@+id/objectif"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:spinnerMode="dropdown" />
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp">
-            <EditText android:id="@+id/input_mobile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:hint="Mobile Number" />
-        </android.support.design.widget.TextInputLayout>
-
         <!-- Password Label -->
-        <EditText
-            android:id="@+id/editText2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Date de naissance"
-            android:inputType="date" />
-
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -89,12 +49,10 @@
                 android:id="@+id/input_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Mot de passe"
+                android:hint="@string/mot_de_passe"
                 android:inputType="textPassword" />
-
         </android.support.design.widget.TextInputLayout>
 
-        <!-- Password Re-enter Label -->
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -102,14 +60,70 @@
             android:layout_marginBottom="8dp">
 
             <EditText
-                android:id="@+id/input_reEnterPassword"
+                android:id="@+id/input_password_repeat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Confirmez votre mot de passe"
+                android:hint="@string/confirmez_votre_mot_de_passe"
                 android:inputType="textPassword" />
+
         </android.support.design.widget.TextInputLayout>
 
         <!-- Signup Button -->
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+
+            <EditText
+                android:id="@+id/input_age"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Age (en années)"
+                android:inputType="number" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+
+            <EditText
+                android:id="@+id/input_taille"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Taille (en cm)"
+                android:inputType="number" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <Spinner
+            android:id="@+id/sexSpinner"
+            android:layout_width="362dp"
+            android:layout_height="38dp"
+            android:popupBackground="@color/primary_dark"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.498" />
+
+        <Spinner
+            android:id="@+id/objectiveSpinner"
+            android:layout_width="362dp"
+            android:layout_height="38dp"
+            android:layout_marginTop="8dp"
+            android:popupBackground="@color/primary_dark"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.498" />
+
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_signup"
             android:layout_width="fill_parent"
@@ -125,7 +139,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:gravity="center"
-            android:text="Déjà enregistré ? Connectez-vous !"
+            android:text="@string/d_j_enregistr_connectez_vous"
             android:textSize="16dip" />
 
     </LinearLayout>
