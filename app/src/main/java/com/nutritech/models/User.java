@@ -21,6 +21,11 @@ public class User {
     private String gender;
     private HashMap<Integer, FoodList> calendarFoodList;
 
+
+    public User() {
+
+    }
+
     /**
      * Create a user
      *
@@ -32,6 +37,7 @@ public class User {
      * @param age       user's age
      * @param gender    user's gender
      */
+
     public User(String firstname, String lastname, Goal goal, int weight, int height, int age, String gender) {
 
         this.firstname = firstname;

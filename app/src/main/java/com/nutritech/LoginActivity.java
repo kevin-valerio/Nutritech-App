@@ -5,11 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.nutritech.models.UserSingleton;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
@@ -33,23 +34,13 @@ public class LoginActivity extends AppCompatActivity {
         _signupLink = findViewById(R.id.link_signup);
 
 
-        _loginButton.setOnClickListener(new View.OnClickListener() {
+        _loginButton.setOnClickListener(v -> login());
 
-            @Override
-            public void onClick(View v) {
-                login();
-            }
-        });
-
-        _signupLink.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
-                startActivityForResult(intent, REQUEST_SIGNUP);
-                finish();
-                overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
-            }
+        _signupLink.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
+            startActivityForResult(intent, REQUEST_SIGNUP);
+            finish();
+            overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
         });
     }
 
@@ -68,32 +59,19 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setMessage("Connection...");
         progressDialog.show();
 
-        String email = _emailText.getText().toString();
-        String password = _passwordText.getText().toString();
-
-        // TODO: Implement your own authentication logic here.
-
         new android.os.Handler().postDelayed(
-                new Runnable() {
-                    public void run() {
-                        onLoginSuccess();
-                        progressDialog.dismiss();
-                    }
+                () -> {
+                    onLoginSuccess();
+                    progressDialog.dismiss();
                 }, 3000);
+
+
     }
 
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_SIGNUP) {
-            if (resultCode == RESULT_OK) {
-
-                // TODO: Implement successful signup logic here
-                // By default we just finish the Activity and log them in automatically
-                this.finish();
-            }
-        }
+    private boolean areCredentialsOk(String email, String password) {
+        return email.equals(UserSingleton.getUser().getMail()) && password.equals(UserSingleton.getUser().getPassword());
     }
+
 
     @Override
     public void onBackPressed() {
@@ -101,8 +79,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onLoginSuccess() {
-        _loginButton.setEnabled(true);
+        startActivity(new Intent(this, DashboardActivity.class));
         finish();
+        overridePendingTransition(R.anim.push_left_out, R.anim.push_left_in);
     }
 
     public void onLoginFailed() {
@@ -128,6 +107,10 @@ public class LoginActivity extends AppCompatActivity {
             valid = false;
         } else {
             _passwordText.setError(null);
+        }
+
+        if (!areCredentialsOk(email, password)) {
+            valid = false;
         }
 
         return valid;

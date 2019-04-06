@@ -28,11 +28,13 @@ public class SignupActivity extends AppCompatActivity implements AdapterView.OnI
     private Spinner sex;
     private TextView goLogin;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+
 
         register = findViewById(R.id.btn_signup);
         age = findViewById(R.id.input_age);
@@ -47,8 +49,12 @@ public class SignupActivity extends AppCompatActivity implements AdapterView.OnI
         sex.setPrompt("Selectionnez votre sexe");
 
         register.setOnClickListener(click -> register());
-        goLogin.setOnClickListener(click -> startActivity(new Intent(this, LoginActivity.class)));
-
+        goLogin.setOnClickListener(click -> {
+                    startActivity(new Intent(this, LoginActivity.class));
+                    finish();
+                    overridePendingTransition(R.anim.push_left_out, R.anim.push_left_in);
+                }
+        );
 
         prepareDropbox(R.id.objectiveSpinner, getGoodNames());
         prepareDropbox(R.id.sexSpinner, sexes);
@@ -64,9 +70,11 @@ public class SignupActivity extends AppCompatActivity implements AdapterView.OnI
             UserSingleton.getUser().setPassword(passwd.getText().toString());
 
             UserSingleton.getUser().setGender(sex.getSelectedItem().toString());
-            UserSingleton.getUser().setGoal(Goal.valueOf(sex.getSelectedItem().toString()));
-
-            startActivity(new Intent(this, DashboardActivity.class));
+            Goal[] goals = Goal.values();
+            UserSingleton.getUser().setGoal(goals[objectives.getSelectedItemPosition()]);
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
+            overridePendingTransition(R.anim.push_left_out, R.anim.push_left_in);
 
         }
     }
@@ -100,11 +108,6 @@ public class SignupActivity extends AppCompatActivity implements AdapterView.OnI
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
     }
-//
-//    @Override
-//    public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {
-//        Toast.makeText(getApplicationContext(), sexes[position], Toast.LENGTH_LONG).show();
-//    }
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
