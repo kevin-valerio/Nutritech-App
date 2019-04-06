@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.nutritech.models.DashboardActivity;
 import com.nutritech.models.UserSingleton;
 
 public class LoginActivity extends AppCompatActivity {
