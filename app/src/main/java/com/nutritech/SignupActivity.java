@@ -72,6 +72,7 @@ public class SignupActivity extends AppCompatActivity implements AdapterView.OnI
             UserSingleton.getUser().setGender(sex.getSelectedItem().toString());
             Goal[] goals = Goal.values();
             UserSingleton.getUser().setGoal(goals[objectives.getSelectedItemPosition()]);
+            Toast.makeText(getApplicationContext(), "Vous avez été enregistré !", Toast.LENGTH_LONG).show();
             startActivity(new Intent(this, LoginActivity.class));
             finish();
             overridePendingTransition(R.anim.push_left_out, R.anim.push_left_in);

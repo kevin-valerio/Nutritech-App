@@ -23,11 +23,14 @@
     <string name="d_j_enregistr_connectez_vous">Déjà enregistré ? Connectez-vous !</string>
     <string name="adresse_mail">Adresse mail</string>
     <string name="confirmez_votre_mot_de_passe">Confirmez votre mot de passe</string>
-    <string name="title_activity_dashboard">DashboardActivity</string>
+    <string name="title_activity_dashboard">Tableau de bord</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="bilans_et_r_capitulatifs">Bilans et récapitulatifs</string>
+    <string name="tableau_de_bord">Tableau de bord</string>
+    <string name="mon_compte">Mon compte</string>
 </resources>
