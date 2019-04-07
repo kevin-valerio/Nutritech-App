@@ -1,7 +1,10 @@
 package com.nutritech;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,18 +18,119 @@ import android.widget.TextView;
 
 import com.nutritech.models.UserSingleton;
 import com.nutritech.models.WeightAlertBuilder;
+import com.wanderingcan.persistentsearch.PersistentSearchView;
+import com.wanderingcan.persistentsearch.SearchMenuItem;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DashboardActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    private static final int VOICE_RECOGNITION_CODE = 9999;
+    PersistentSearchView searchView;
+    private boolean mMicEnabled;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+        searchView = findViewById(R.id.search_bar);
+        mMicEnabled = isIntentAvailable(new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH));
 
         initToolBar();
         initNavigationView();
         initFloatingButton();
+        initSearchBar();
+
     }
+
+    private boolean isIntentAvailable(Intent intent) {
+        PackageManager mgr = getPackageManager();
+        if (mgr != null) {
+            List<ResolveInfo> list = mgr.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+            return list.size() > 0;
+        }
+        return false;
+    }
+
+    private void initSearchBar() {
+        searchView.setOnSearchListener(new PersistentSearchView.OnSearchListener() {
+            @Override
+            public void onSearchOpened() {
+//                Called when the Searchbar is opened by the user or by something calling
+                searchView.openSearch();
+            }
+
+            @Override
+            public void onSearchClosed() {
+                //Called when the searchbar is closed by the user or by something calling
+                searchView.closeSearch();
+            }
+
+            @Override
+            public void onSearchCleared() {
+                //Called when the searchbar has been cleared by the user by removing all
+                //the text or hitting the clear button. This also will be called if
+                // is set with a null string or
+                //an empty string
+
+            }
+
+            @Override
+            public void onSearchTermChanged(CharSequence term) {
+                //Called when the text in the searchbar has been changed by the user or
+                //by searchView.populateSearchText() with text passed in.
+                //Best spot to handle giving suggestions to the user in the menu
+            }
+
+            @Override
+            public void onSearch(CharSequence text) {
+                //Called when the user hits the IME Action Search on the keyboard to search
+                //Here is the best spot to handle searches
+            }
+
+        });
+
+        searchView.setOnIconClickListener(new PersistentSearchView.OnIconClickListener() {
+            @Override
+            public void OnNavigationIconClick() {
+            }
+
+            @Override
+            public void OnEndIconClick() {
+                startVoiceRecognition();
+            }
+        });
+
+        searchView.setOnMenuItemClickListener(new PersistentSearchView.OnMenuItemClickListener() {
+            @Override
+            public void onMenuItemClick(SearchMenuItem item) {
+                //Called when an Item in the SearchMenu is clicked, it passes in the
+                //SearchMenuItem that was clicked
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == VOICE_RECOGNITION_CODE && resultCode == RESULT_OK) {
+            ArrayList<String> matches = data
+                    .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+            searchView.populateSearchText(matches.get(0));
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void startVoiceRecognition() {
+
+        if (mMicEnabled) {
+            Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+            intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Prononcez le nom de votre aliment");
+            startActivityForResult(intent, VOICE_RECOGNITION_CODE);
+        }
+    }
+
 
     //Initialise le FloatinButton
     private void initFloatingButton() {

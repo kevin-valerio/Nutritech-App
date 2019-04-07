@@ -8,4 +8,21 @@
     tools:context=".DashboardActivity"
     tools:showIn="@layout/app_bar_dashboard">
 
+    <com.wanderingcan.persistentsearch.PersistentSearchView
+        android:id="@+id/search_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:theme="@style/AlertDialog.AppCompat"
+        app:cardBackgroundColor="@color/search"
+        app:endSrc="@drawable/ic_action_mic"
+        app:hint="Entrez le nom de votre aliment"
+        app:hintAlwaysActive="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:showMenu="true" />
+
 </android.support.constraint.ConstraintLayout>
