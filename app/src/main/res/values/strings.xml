@@ -33,4 +33,10 @@
     <string name="bilans_et_r_capitulatifs">Bilans et récapitulatifs</string>
     <string name="tableau_de_bord">Tableau de bord</string>
     <string name="mon_compte">Mon compte</string>
+    <string name="taille_en_cm">Taille (en cm)</string>
+    <string name="s_enregistrer">S\'enregistrer</string>
+    <string name="mon_bilan_hebdomadaire">Mon bilan hebdomadaire</string>
+    <string name="mon_bilan_mensuel">Mon bilan mensuel</string>
+    <string name="se_d_connecter">Se déconnecter</string>
+    <string name="new_poids">Ajoutez un nouveau poids !</string>
 </resources>

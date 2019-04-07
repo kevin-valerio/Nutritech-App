@@ -50,7 +50,9 @@ public class SignupActivity extends AppCompatActivity implements AdapterView.OnI
 
         register.setOnClickListener(click -> register());
         goLogin.setOnClickListener(click -> {
-                    startActivity(new Intent(this, LoginActivity.class));
+            Intent loginIntent = new Intent(this, LoginActivity.class);
+            loginIntent.putExtra("mail", mail.getText().toString());
+            startActivity(loginIntent);
                     finish();
                     overridePendingTransition(R.anim.push_left_out, R.anim.push_left_in);
                 }

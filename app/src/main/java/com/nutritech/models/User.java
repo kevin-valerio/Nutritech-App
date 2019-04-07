@@ -186,4 +186,5 @@ public class User {
     public void setCalendarFoodList(HashMap<Integer, FoodList> calendarFoodList) {
         this.calendarFoodList = calendarFoodList;
     }
+
 }

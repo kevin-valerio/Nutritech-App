@@ -10,17 +10,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.nutritech.models.DashboardActivity;
 import com.nutritech.models.UserSingleton;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
 
-    EditText _emailText;
-    EditText _passwordText;
-    Button _loginButton;
-    TextView _signupLink;
+    EditText emailText;
+    EditText passwordText;
+    Button loginButton;
+    TextView signupLink;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -29,15 +28,21 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        _emailText = findViewById(R.id.input_email);
-        _passwordText = findViewById(R.id.input_password);
-        _loginButton = findViewById(R.id.btn_login);
-        _signupLink = findViewById(R.id.link_signup);
+        emailText = findViewById(R.id.input_email);
+
+        String mail = UserSingleton.getUser().getMail();
+        if (mail != null) {
+            emailText.setText(mail);
+        }
+
+        passwordText = findViewById(R.id.input_password);
+        loginButton = findViewById(R.id.btn_login);
+        signupLink = findViewById(R.id.link_signup);
 
 
-        _loginButton.setOnClickListener(v -> login());
+        loginButton.setOnClickListener(v -> login());
 
-        _signupLink.setOnClickListener(v -> {
+        signupLink.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
             startActivityForResult(intent, REQUEST_SIGNUP);
             finish();
@@ -53,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        _loginButton.setEnabled(false);
+        loginButton.setEnabled(false);
 
         final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this, R.style.AppTheme_Dark_Dialog);
         progressDialog.setIndeterminate(true);
@@ -87,27 +92,27 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onLoginFailed() {
         Toast.makeText(getBaseContext(), "Votre adresse mail et votre mot de passe ne correspondent pas", Toast.LENGTH_LONG).show();
-        _loginButton.setEnabled(true);
+        loginButton.setEnabled(true);
     }
 
     public boolean validate() {
         boolean valid = true;
 
-        String email = _emailText.getText().toString();
-        String password = _passwordText.getText().toString();
+        String email = emailText.getText().toString();
+        String password = passwordText.getText().toString();
 
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            _emailText.setError("Veuillez entrer une adresse mail valide");
+            emailText.setError("Veuillez entrer une adresse mail valide");
             valid = false;
         } else {
-            _emailText.setError(null);
+            emailText.setError(null);
         }
 
         if (password.isEmpty() || password.length() < 4) {
-            _passwordText.setError("Le mot de passe doit avoir au moins 4 caratères");
+            passwordText.setError("Le mot de passe doit avoir au moins 4 caratères");
             valid = false;
         } else {
-            _passwordText.setError(null);
+            passwordText.setError(null);
         }
 
         if (!areCredentialsOk(email, password)) {

@@ -14,8 +14,8 @@
         android:paddingRight="24dp">
 
         <ImageView
-            android:layout_width="251dp"
-            android:layout_height="104dp"
+            android:layout_width="364dp"
+            android:layout_height="124dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="24dp"
             android:src="@mipmap/nutritech_logo"
@@ -94,7 +94,7 @@
                 android:id="@+id/input_taille"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Taille (en cm)"
+                android:hint="@string/taille_en_cm"
                 android:inputType="number" />
 
         </android.support.design.widget.TextInputLayout>
@@ -131,7 +131,7 @@
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
             android:padding="12dp"
-            android:text="S'enregistrer" />
+            android:text="@string/s_enregistrer" />
 
         <TextView
             android:id="@+id/link_login"
@@ -140,7 +140,7 @@
             android:layout_marginBottom="24dp"
             android:gravity="center"
             android:text="@string/d_j_enregistr_connectez_vous"
-            android:textSize="16dip" />
+            android:textSize="16sp" />
 
     </LinearLayout>
 </ScrollView>
