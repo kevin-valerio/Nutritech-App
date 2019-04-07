@@ -71,7 +71,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         layout.addView(poids);
 
         builder.setPositiveButton("Ajouter", (dialog, which) -> {
-                    //TODO : ajouter le poids poids.getText().toString()
+            UserSingleton.getUser().addWeight(Integer.valueOf(poids.getText().toString()));
                     Toast.makeText(this, "Votre nouveau poids a été ajouté (" + poids.getText().toString() + " kg)", Toast.LENGTH_LONG).show();
                 }
         );
