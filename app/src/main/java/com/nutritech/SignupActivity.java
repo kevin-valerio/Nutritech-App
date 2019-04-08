@@ -17,7 +17,6 @@ import com.nutritech.models.UserSingleton;
 
 public class SignupActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    String[] sexes = {"Homme", "Femme", "Autre"};
     private Button register;
     private EditText age;
     private EditText taille;
@@ -59,7 +58,7 @@ public class SignupActivity extends AppCompatActivity implements AdapterView.OnI
         );
 
         prepareDropbox(R.id.objectiveSpinner, getGoodNames());
-        prepareDropbox(R.id.sexSpinner, sexes);
+        prepareDropbox(R.id.sexSpinner, new String[]{"Homme", "Femme", "Autre"});
     }
 
 
