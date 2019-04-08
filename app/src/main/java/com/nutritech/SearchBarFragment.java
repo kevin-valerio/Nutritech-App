@@ -64,7 +64,6 @@ public class SearchBarFragment extends Fragment {
             @SuppressLint("RestrictedApi")
             @Override
             public void onSearchOpened() {
-                mSearchView.getSearchMenu().addSearchMenuItem(2, "Suggestion").setIcon(R.drawable.ic_globe);
             }
 
             @Override
@@ -74,25 +73,45 @@ public class SearchBarFragment extends Fragment {
             @Override
             public void onSearchCleared() {
                 mSearchView.getSearchMenu().removeSearchMenuItem(mSearchView.getSearchMenu().getSearchMenuItem(1));
-
             }
 
             @Override
             public void onSearchTermChanged(CharSequence term) {
-//                if (mSearchView.getSearchMenu().getSearchMenuItem(1) != null) {
-//                    mSearchView.getSearchMenu().getSearchMenuItem(1).setTitle(term.toString());
-//                } else {
-//                    mSearchView.getSearchMenu().addSearchMenuItem(1, term.toString(), 1).setIcon(R.drawable.ic_history);
-//                }
 
                 FoodSuggestor foodSuggestor = new FoodSuggestor();
-                //TODO : Ici on addSearchItem
+                int counter = 0;
+                for (String food : foodSuggestor.getFoodList()) {
+                    if (food.contains(term)) {
+                        ++counter;
+                        mSearchView.getSearchMenu().addSearchMenuItem(1, food);
+
+                    }
+                    if (counter <= 3) {
+                        break;
+                    }
+                }
+                removeUnfoundableItems(term);
+            }
+
+            private void removeUnfoundableItems(CharSequence term) {
+                int size = 0;
+                for (int i = 0; i < new FoodSuggestor().getFoodList().size(); i++) {
+                    if (mSearchView.getSearchMenu().getSearchMenuItem(i) != null) {
+                        ++size;
+                    }
+                }
+
+                for (int i = 0; i < size; ++i) {
+                    if (!mSearchView.getSearchMenu().getSearchMenuItem(i).getTitle().contains(term.toString())) {
+                        mSearchView.getSearchMenu().removeSearchMenuItem(mSearchView.getSearchMenu().getSearchMenuItem(i));
+                    }
+                }
+
             }
 
             @Override
             public void onSearch(CharSequence text) {
-                Snackbar.make(mSearchView, "Searched for \'" + text + "\'", Snackbar.LENGTH_LONG)
-                        .show();
+                Snackbar.make(mSearchView, "Searched for '" + text + "'", Snackbar.LENGTH_LONG).show();
             }
 
         });
@@ -113,6 +132,7 @@ public class SearchBarFragment extends Fragment {
             //SearchMenuItem that was clicked
         });
     }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
