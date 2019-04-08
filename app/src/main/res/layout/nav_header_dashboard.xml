@@ -13,7 +13,7 @@
     <TextView
         android:id="@+id/nomPrenomTxtView"
         android:layout_width="392dp"
-        android:layout_height="wrap_content"
+        android:layout_height="39dp"
         android:layout_marginBottom="20dp"
         android:text="@string/nav_header_title"
 
@@ -23,9 +23,16 @@
     <TextView
         android:id="@+id/objectifTxtView"
         android:layout_width="392dp"
-        android:layout_height="wrap_content"
+        android:layout_height="34dp"
         android:layout_marginBottom="10dp"
         android:text="@string/nav_header_subtitle"
         android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/feedbackTxtView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/u_donnez_nous_un_feedback_u"
+        android:textColor="#7AB1FF" />
 
 </LinearLayout>

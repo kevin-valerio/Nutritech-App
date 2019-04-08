@@ -1,8 +1,6 @@
 package com.nutritech;
 
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.support.design.widget.FloatingActionButton;
@@ -10,6 +8,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -18,119 +17,39 @@ import android.widget.TextView;
 
 import com.nutritech.models.UserSingleton;
 import com.nutritech.models.WeightAlertBuilder;
-import com.wanderingcan.persistentsearch.PersistentSearchView;
-import com.wanderingcan.persistentsearch.SearchMenuItem;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class DashboardActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private static final int VOICE_RECOGNITION_CODE = 9999;
-    PersistentSearchView searchView;
-    private boolean mMicEnabled;
+
+    SearchBarFragment searchBarFragment;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-        searchView = findViewById(R.id.search_bar);
-        mMicEnabled = isIntentAvailable(new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH));
 
         initToolBar();
         initNavigationView();
         initFloatingButton();
-        initSearchBar();
 
+        searchBarFragment = (SearchBarFragment) getFragmentManager().findFragmentById(R.id.search_bar);
     }
 
-    private boolean isIntentAvailable(Intent intent) {
-        PackageManager mgr = getPackageManager();
-        if (mgr != null) {
-            List<ResolveInfo> list = mgr.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
-            return list.size() > 0;
-        }
-        return false;
-    }
 
-    private void initSearchBar() {
-        searchView.setOnSearchListener(new PersistentSearchView.OnSearchListener() {
-            @Override
-            public void onSearchOpened() {
-//                Called when the Searchbar is opened by the user or by something calling
-                searchView.openSearch();
-            }
-
-            @Override
-            public void onSearchClosed() {
-                //Called when the searchbar is closed by the user or by something calling
-                searchView.closeSearch();
-            }
-
-            @Override
-            public void onSearchCleared() {
-                //Called when the searchbar has been cleared by the user by removing all
-                //the text or hitting the clear button. This also will be called if
-                // is set with a null string or
-                //an empty string
-
-            }
-
-            @Override
-            public void onSearchTermChanged(CharSequence term) {
-                //Called when the text in the searchbar has been changed by the user or
-                //by searchView.populateSearchText() with text passed in.
-                //Best spot to handle giving suggestions to the user in the menu
-            }
-
-            @Override
-            public void onSearch(CharSequence text) {
-                //Called when the user hits the IME Action Search on the keyboard to search
-                //Here is the best spot to handle searches
-            }
-
-        });
-
-        searchView.setOnIconClickListener(new PersistentSearchView.OnIconClickListener() {
-            @Override
-            public void OnNavigationIconClick() {
-            }
-
-            @Override
-            public void OnEndIconClick() {
-                startVoiceRecognition();
-            }
-        });
-
-        searchView.setOnMenuItemClickListener(new PersistentSearchView.OnMenuItemClickListener() {
-            @Override
-            public void onMenuItemClick(SearchMenuItem item) {
-                //Called when an Item in the SearchMenu is clicked, it passes in the
-                //SearchMenuItem that was clicked
-            }
-        });
-    }
-
+    /* Quand on revient sur le Dashboard, on active onActivityResult
+       Aussi utilisé pour récuperer le texte de la voix
+    */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == VOICE_RECOGNITION_CODE && resultCode == RESULT_OK) {
-            ArrayList<String> matches = data
-                    .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-            searchView.populateSearchText(matches.get(0));
+        if (requestCode == SearchBarFragment.VOICE_RECOGNITION_CODE && resultCode == RESULT_OK) {
+            ArrayList<String> matches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+            searchBarFragment.getmSearchView().populateSearchText(matches.get(0));
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
-
-    private void startVoiceRecognition() {
-
-        if (mMicEnabled) {
-            Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-            intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Prononcez le nom de votre aliment");
-            startActivityForResult(intent, VOICE_RECOGNITION_CODE);
-        }
-    }
-
 
     //Initialise le FloatinButton
     private void initFloatingButton() {
@@ -140,6 +59,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         });
     }
 
+    //Demande à l'utilisateur son nouveau poids
     public void askForWeight() {
 
 
@@ -187,7 +107,6 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         weightAlertBuilder.build();
     }
 
-
     //Initialise la toolbar
     private void initToolBar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -205,18 +124,27 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         NavigationView navigationView = findViewById(R.id.nav_view);
         View header = navigationView.getHeaderView(0);
         navigationView.setNavigationItemSelectedListener(this);
+
         TextView nomPrenomTxtView = header.findViewById(R.id.nomPrenomTxtView);
         TextView objectifTxtView = header.findViewById(R.id.objectifTxtView);
+        TextView feedback = header.findViewById(R.id.feedbackTxtView);
 
         String connectedWith = "Connecté avec " + UserSingleton.getUser().getMail();
-        nomPrenomTxtView.setText(connectedWith);
         String mainGoal = "Votre objectif : " + UserSingleton.getUser().getGoal().toString().toLowerCase().replace("_", " ");
+
+        nomPrenomTxtView.setText(connectedWith);
         objectifTxtView.setText(mainGoal);
+        feedback.setOnClickListener(click -> new AlertDialog.Builder(getApplicationContext())
+                .setTitle("Envoyez-nous un feedback !")
+                .setMessage("Envoyez un mail à l'adresse feedback@nutritech.com, et dites nous ce que vous pensez de l'application ! \nEt n'oubliez pas de nous noter sur le Play Store")
+                .setPositiveButton("D'accord", null)
+                .setIcon(android.R.drawable.ic_dialog_email)
+                .show()
+        );
 
     }
 
-    //Définit les actions lorsqu'on clique sur les bouttons du menu de gauche
-
+    //Définit l'action lorsque l'onclique sur " < "
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -227,6 +155,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         }
     }
 
+    //Définit les actions lorsqu'on clique sur les bouttons du menu de gauche
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -248,9 +177,4 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         return true;
     }
 
-
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-
-    }
 }
