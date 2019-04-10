@@ -72,7 +72,7 @@ public class Food {
 
     @Override
     public String toString() {
-        return name + " : " + quantite + "g";
+        return name;
     }
 
     public long getCalorie() {
