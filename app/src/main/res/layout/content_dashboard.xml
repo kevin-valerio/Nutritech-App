@@ -8,11 +8,11 @@
     tools:context=".DashboardActivity"
     tools:showIn="@layout/app_bar_dashboard">
 
-    <fragment
-        android:id="@+id/search_bar"
-        android:name="com.nutritech.SearchBarFragment"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:layout_marginTop="15dp" />
+    <!--<fragment-->
+    <!--android:id="@+id/search_bar"-->
+    <!--android:name="com.nutritech.SearchBarFragment"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_marginTop="15dp" />-->
 
 </android.support.constraint.ConstraintLayout>

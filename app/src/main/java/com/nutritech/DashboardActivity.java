@@ -2,7 +2,6 @@ package com.nutritech;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.speech.RecognizerIntent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -11,6 +10,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -18,12 +18,8 @@ import android.widget.TextView;
 import com.nutritech.models.UserSingleton;
 import com.nutritech.models.WeightAlertBuilder;
 
-import java.util.ArrayList;
 
 public class DashboardActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
-
-    SearchBarFragment searchBarFragment;
 
 
     @Override
@@ -35,21 +31,8 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         initNavigationView();
         initFloatingButton();
 
-        searchBarFragment = (SearchBarFragment) getFragmentManager().findFragmentById(R.id.search_bar);
     }
 
-
-    /* Quand on revient sur le Dashboard, on active onActivityResult
-       Aussi utilisé pour récuperer le texte de la voix
-    */
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == SearchBarFragment.VOICE_RECOGNITION_CODE && resultCode == RESULT_OK) {
-            ArrayList<String> matches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-            searchBarFragment.getmSearchView().populateSearchText(matches.get(0));
-        }
-        super.onActivityResult(requestCode, resultCode, data);
-    }
 
     //Initialise le FloatinButton
     private void initFloatingButton() {
@@ -134,9 +117,9 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
 
         nomPrenomTxtView.setText(connectedWith);
         objectifTxtView.setText(mainGoal);
-        feedback.setOnClickListener(click -> new AlertDialog.Builder(getApplicationContext())
+        feedback.setOnClickListener(click -> new AlertDialog.Builder(DashboardActivity.this, R.style.Theme_AppCompat_Light_Dialog_Alert)
                 .setTitle("Envoyez-nous un feedback !")
-                .setMessage("Envoyez un mail à l'adresse feedback@nutritech.com, et dites nous ce que vous pensez de l'application ! \nEt n'oubliez pas de nous noter sur le Play Store")
+                .setMessage("Envoyez un mail à l'adresse feedback@nutritech.com, et dites nous ce que vous pensez de l'application ! \n\nEt n'oubliez pas de nous noter sur le Play Store")
                 .setPositiveButton("D'accord", null)
                 .setIcon(android.R.drawable.ic_dialog_email)
                 .show()
@@ -174,6 +157,21 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.search_item, menu);
+        MenuItem item = menu.findItem(R.id.action_search);
+        item.setOnMenuItemClickListener(menuItem -> {
+            startActivity(new Intent(this, SearchFoodActivitty.class));
+            overridePendingTransition(R.anim.push_left_out, R.anim.push_left_in);
+            return true;
+        });
+
+
         return true;
     }
 

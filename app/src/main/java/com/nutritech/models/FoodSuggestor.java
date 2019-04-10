@@ -3,9 +3,9 @@ package com.nutritech.models;
 import java.util.ArrayList;
 
 public class FoodSuggestor {
-    private ArrayList<String> foodList = new ArrayList<>();
+    private static ArrayList<String> foodList = new ArrayList<>();
 
-    {
+    static {
         foodList.add("Mandarine");
         foodList.add("Pomme");
         foodList.add("Poire");
@@ -21,7 +21,8 @@ public class FoodSuggestor {
         foodList.add("Pates");
 
     }
-    public ArrayList<String> getFoodList() {
+
+    public static ArrayList<String> getFoodList() {
 
         return foodList;
     }

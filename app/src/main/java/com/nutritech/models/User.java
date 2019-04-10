@@ -23,7 +23,18 @@ public class User {
 
 
     public User() {
+        //MOCK-UP à A SUPPRIMER
 
+        this.mail = "a@a.aa";
+        this.firstname = "a@a.aa";
+        this.lastname = "a@a.aa";
+        this.password = "a@a.aa";
+        this.goal = Goal.PERTE_DE_MASSE;
+        this.age = 18;
+        this.gender = "Homme";
+        this.height = 80;
+
+        //FIN MOCKUP
     }
 
     /**
