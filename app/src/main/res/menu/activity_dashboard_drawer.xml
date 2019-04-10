@@ -9,7 +9,7 @@
                 <item
                     android:id="@+id/dashboard"
                     android:icon="@drawable/baseline_dashboard_black_18dp"
-                    android:title="@string/tableau_de_bord" />
+                    android:title="@string/real_tableau_de_bord" />
 
                 <item
                     android:id="@+id/bilance_hebdo"

@@ -46,4 +46,5 @@
     <string name="chercher_un_aliment">Chercher un aliment</string>
     <string name="rechercher_un_aliment">reChercher un aliment</string>
     <string name="entrez_votre_aliment">Entrez votre aliment</string>
+    <string name="real_tableau_de_bord">Tableau de bord</string>
 </resources>

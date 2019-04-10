@@ -1,15 +1,9 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <!--&lt;!&ndash; Irrelevant stuff &ndash;&gt;-->
-    <!--<include-->
-    <!--layout="@layout/mok_items"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_marginTop="?attr/actionBarSize" />-->
 
 
     <android.support.v7.widget.Toolbar
@@ -19,33 +13,334 @@
         android:background="@color/primary" />
 
 
-    <android.support.constraint.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="668dp"
         android:layout_marginTop="60dp">
 
-        <TextView
-            android:id="@+id/foodNameTxt"
+        <Button
+            android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="58dp"
+            android:layout_marginTop="414dp"
+            android:layout_marginEnd="63dp"
+            android:layout_marginBottom="204dp"
+            android:text="Ajouter"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.49"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="484dp" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="57dp"
+            android:layout_marginTop="92dp"
+            android:layout_marginEnd="52dp"
+            android:layout_marginBottom="561dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="2dp"
+            android:paddingRight="5dp"
+            android:paddingBottom="2dp"
+            android:scaleType="fitXY"
+            android:src="@android:drawable/divider_horizontal_dark"
+            tools:layout_editor_absoluteX="55dp"
+            tools:layout_editor_absoluteY="175dp" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="16dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="56dp"
+            android:layout_marginEnd="54dp"
+            android:layout_marginBottom="515dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="2dp"
+            android:paddingRight="5dp"
+            android:paddingBottom="2dp"
+            android:scaleType="fitXY"
+            android:src="@android:drawable/divider_horizontal_dark"
+            tools:layout_editor_absoluteX="55dp"
+            tools:layout_editor_absoluteY="121dp" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="298dp"
+            android:layout_height="16dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="54dp"
+            android:layout_marginEnd="58dp"
+            android:layout_marginBottom="342dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="2dp"
+            android:paddingRight="5dp"
+            android:paddingBottom="2dp"
+            android:scaleType="fitXY"
+            android:src="@android:drawable/divider_horizontal_dark"
+            tools:layout_editor_absoluteX="55dp"
+            tools:layout_editor_absoluteY="237dp" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="17dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="55dp"
+            android:layout_marginEnd="55dp"
+            android:layout_marginBottom="456dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="2dp"
+            android:paddingRight="5dp"
+            android:paddingBottom="2dp"
+            android:scaleType="fitXY"
+            android:src="@android:drawable/divider_horizontal_dark"
+            tools:layout_editor_absoluteX="55dp"
+            tools:layout_editor_absoluteY="353dp" />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="298dp"
+            android:layout_height="17dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="56dp"
+            android:layout_marginEnd="57dp"
+            android:layout_marginBottom="398dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="2dp"
+            android:paddingRight="5dp"
+            android:paddingBottom="2dp"
+            android:scaleType="fitXY"
+            android:src="@android:drawable/divider_horizontal_dark"
+            tools:layout_editor_absoluteX="55dp"
+            tools:layout_editor_absoluteY="295dp" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="154dp"
+            android:layout_height="21dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="67dp"
+            android:layout_marginTop="281dp"
+            android:layout_marginEnd="190dp"
+            android:layout_marginBottom="366dp"
+            android:text="Lipides"
+            tools:layout_editor_absoluteX="55dp"
+            tools:layout_editor_absoluteY="323dp" />
+
+        <TextView
+            android:id="@+id/PROT_TXTVIEW"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="222dp"
+            android:layout_marginTop="166dp"
+            android:layout_marginEnd="39dp"
+            android:layout_marginBottom="480dp"
+            android:text="0 grammes"
+            app:layout_constraintEnd_toEndOf="@+id/imageView2"
+            tools:layout_editor_absoluteY="326dp" />
+
+        <TextView
+            android:id="@+id/LIPIDES_TXTVIEW"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="224dp"
+            android:layout_marginTop="281dp"
+            android:layout_marginEnd="62dp"
+            android:layout_marginBottom="368dp"
+            android:text="0 grammes"
+            app:layout_constraintEnd_toEndOf="@+id/imageView2"
+            tools:layout_editor_absoluteY="326dp" />
+
+        <TextView
+            android:id="@+id/GLUCIDES_TXTVIEW"
+            android:layout_width="137dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="222dp"
+            android:layout_marginTop="223dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginBottom="423dp"
+            android:text="0 grammes"
+            tools:layout_editor_absoluteX="276dp"
+            tools:layout_editor_absoluteY="263dp" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="83dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="61dp"
+            android:layout_marginTop="112dp"
+            android:layout_marginEnd="267dp"
+            android:layout_marginBottom="534dp"
+            android:text="kCal"
+            tools:layout_editor_absoluteX="55dp"
+            tools:layout_editor_absoluteY="148dp" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="171dp"
+            android:layout_height="18dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="62dp"
+            android:layout_marginTop="168dp"
+            android:layout_marginEnd="182dp"
+            android:layout_marginBottom="482dp"
+            android:text="Protéines"
+            tools:layout_editor_absoluteX="55dp"
+            tools:layout_editor_absoluteY="260dp" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="171dp"
+            android:layout_height="18dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="62dp"
+            android:layout_marginTop="220dp"
+            android:layout_marginEnd="178dp"
+            android:layout_marginBottom="430dp"
+            android:text="Glucides"
+            tools:layout_editor_absoluteX="55dp"
+            tools:layout_editor_absoluteY="260dp" />
+
+        <TextView
+            android:id="@+id/foodNameTxt"
+            android:layout_width="403dp"
+            android:layout_height="52dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="0dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginBottom="616dp"
             android:text="Votre ingrédient s'affichera ici !"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat"
-            android:textSize="30sp"
+            android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-    </android.support.constraint.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/KCAL_TXTVIEW"
+            android:layout_width="146dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="222dp"
+            android:layout_marginTop="111dp"
+            android:layout_marginEnd="43dp"
+            android:layout_marginBottom="531dp"
+            android:text="0 kCal"
+            tools:layout_editor_absoluteX="309dp"
+            tools:layout_editor_absoluteY="148dp" />
+
+        <TextView
+            android:id="@+id/KCAL_TXTVIEW3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="177dp"
+            android:layout_marginTop="64dp"
+            android:layout_marginEnd="42dp"
+            android:layout_marginBottom="578dp"
+            android:text="Valeurs en grammes"
+            android:textAlignment="center"
+            tools:layout_editor_absoluteX="309dp"
+            tools:layout_editor_absoluteY="148dp" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="37dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="344dp"
+            android:layout_marginEnd="45dp"
+            android:layout_marginBottom="265dp"
+            android:text="g"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/editText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.145"
+            app:layout_constraintStart_toEndOf="@+id/editText"
+            app:layout_constraintTop_toTopOf="@+id/editText"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="58dp"
+            android:layout_marginTop="346dp"
+            android:layout_marginEnd="91dp"
+            android:layout_marginBottom="281dp"
+            android:ems="10"
+            android:hint="Quantité (en grammes)"
+            android:inputType="numberSigned"
+            android:textAlignment="center"
+            tools:layout_editor_absoluteX="52dp"
+            tools:layout_editor_absoluteY="393dp" />
+
+
+    </RelativeLayout>
 
     <com.miguelcatalan.materialsearchview.MaterialSearchView
-                android:id="@+id/search_view"
-                style="@style/MaterialSearchViewStyle"
+        android:id="@+id/search_view"
+        style="@style/MaterialSearchViewStyle"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-                android:layout_width="match_parent"
         app:searchSuggestionBackground="@color/bgtqt">
 
 

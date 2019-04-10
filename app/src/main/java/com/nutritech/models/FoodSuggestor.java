@@ -12,7 +12,22 @@ public class FoodSuggestor {
     }
 
     public static ArrayList<Food> getFoodList() {
-
         return foodList;
     }
+
+    public static ArrayList<String> getFoodStringList() {
+        ArrayList<String> toReturn = new ArrayList<>();
+        foodList.forEach(food -> toReturn.add(food.getName()));
+        return toReturn;
+    }
+
+    public static Food getFoodByName(String foodName) {
+        for (Food food : foodList) {
+            if (food.getName().equals(foodName)) {
+                return food;
+            }
+        }
+        return null;
+    }
+
 }
