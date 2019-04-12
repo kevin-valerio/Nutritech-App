@@ -23,8 +23,8 @@ public class FoodList {
     /**
      * Add food and it's quantity to the foodList
      *
-     * @param foodToDel
-     * @param quantity
+     * @param foodToDel food to add
+     * @param quantity quantity of food
      */
     public void addFood(Food foodToDel, long quantity) {
         calorie = (calorie + ((foodToDel.getCalorie() * quantity) / 100));

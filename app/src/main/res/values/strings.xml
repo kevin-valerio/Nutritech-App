@@ -47,4 +47,6 @@
     <string name="rechercher_un_aliment">reChercher un aliment</string>
     <string name="entrez_votre_aliment">Entrez votre aliment</string>
     <string name="real_tableau_de_bord">Tableau de bord</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="carte_de_ma_consommation">Carte de ma consommation</string>
 </resources>

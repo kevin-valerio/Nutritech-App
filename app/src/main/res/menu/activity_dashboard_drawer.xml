@@ -20,6 +20,11 @@
                     android:icon="@drawable/baseline_filter_30_black_18dp"
                     android:title="@string/mon_bilan_mensuel" />
 
+                <item
+                    android:id="@+id/mapps"
+                    android:icon="@drawable/baseline_place_black_18dp"
+                    android:title="@string/carte_de_ma_consommation" />
+
             </menu>
         </item>
     </group>

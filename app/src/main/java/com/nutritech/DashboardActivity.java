@@ -145,12 +145,14 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
 
         if (id == R.id.bilan_mensuel) {
 
-        } else if (id == R.id.dashboard) {
-
+        } else if (id == R.id.mapps) {
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
+            overridePendingTransition(R.anim.push_left_out, R.anim.push_left_in);
         } else if (id == R.id.bilance_hebdo) {
 
         } else if (id == R.id.deconnection) {
-            startActivity(new Intent(this, LoginActivity.class));
+            startActivity(new Intent(this, MapsActivity.class));
             finish();
             overridePendingTransition(R.anim.push_left_out, R.anim.push_left_in);
         }
