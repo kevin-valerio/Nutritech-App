@@ -23,16 +23,9 @@ public class User {
 
 
     public User() {
-        //MOCK-UP à A SUPPRIMER
+        //TODO : MOCK-UP à A SUPPRIMER
 
-        this.mail = "a@a.aa";
-        this.firstname = "a@a.aa";
-        this.lastname = "a@a.aa";
-        this.password = "a@a.aa";
-        this.goal = Goal.PERTE_DE_MASSE;
-        this.age = 18;
-        this.gender = "Homme";
-        this.height = 80;
+        initDatas("a@a.aa", "a@a.aa", Goal.PERTE_DE_MASSE, 80, 180, 12, "Homme", "a@a.aa", "a@a.aa");
 
         //FIN MOCKUP
     }
@@ -49,13 +42,18 @@ public class User {
      * @param gender    user's gender
      */
 
-    public User(String firstname, String lastname, Goal goal, int weight, int height, int age, String gender) {
+    public User(String firstname, String lastname, Goal goal, int weight, int height, int age, String gender, String mail, String password) {
+        initDatas(firstname, lastname, goal, weight, height, age, gender, mail, password);
+    }
 
+    private void initDatas(String firstname, String lastname, Goal goal, int weight, int height, int age, String gender, String mail, String password) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.age = age;
         this.goal = goal;
         this.height = height;
+        this.mail = mail;
+        this.password = password;
         this.kcal = (weight * 10 + height * 6.25) - (5 * age);
 
         addWeight(weight);

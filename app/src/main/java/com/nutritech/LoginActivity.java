@@ -1,8 +1,13 @@
 package com.nutritech;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Button;
@@ -20,6 +25,9 @@ public class LoginActivity extends AppCompatActivity {
     EditText passwordText;
     Button loginButton;
     TextView signupLink;
+
+    public static boolean mLocationPermissionGranted = false;
+    public int PERMISSION_GPS_CODE_NUCLEAIRE = 1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,6 +56,47 @@ public class LoginActivity extends AppCompatActivity {
             finish();
             overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
         });
+
+        askLocationPermission();
+    }
+
+    public void askLocationPermission() {
+
+        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            requestRuntimePermission(LoginActivity.this, Manifest.permission.ACCESS_FINE_LOCATION, PERMISSION_GPS_CODE_NUCLEAIRE);
+        } else {
+//            Toast.makeText(LoginActivity.this, "Manifest.permission.ACCESS_FINE_LOCATION permission already has been granted", Toast.LENGTH_LONG).show();
+            Log.d("", "Manifest.permission.ACCESS_FINE_LOCATION permission already has been granted");
+        }
+    }
+
+
+    private void requestRuntimePermission(Activity activity, String runtimePermission, int requestCode) {
+        ActivityCompat.requestPermissions(activity, new String[]{runtimePermission}, requestCode);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        if (requestCode == PERMISSION_GPS_CODE_NUCLEAIRE) {
+            if (grantResults.length > 0) {
+                StringBuilder msgBuf = new StringBuilder();
+                int grantResult = grantResults[0];
+                if (grantResult == PackageManager.PERMISSION_GRANTED) {
+                    mLocationPermissionGranted = true;
+                }
+                if (permissions != null) {
+                    int length = permissions.length;
+                    for (int i = 0; i < length; i++) {
+                        String permission = permissions[i];
+                        msgBuf.append(permission);
+                        if (i < length - 1) {
+                            msgBuf.append(",");
+                        }
+                    }
+                }
+                Log.d("xx", msgBuf.toString());
+            }
+        }
     }
 
     public void login() {

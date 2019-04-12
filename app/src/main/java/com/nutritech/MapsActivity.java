@@ -1,7 +1,14 @@
 package com.nutritech;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -9,8 +16,12 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.nutritech.models.Food;
+import com.nutritech.models.UserSingleton;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+import java.util.ArrayList;
+
+public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLocationButtonClickListener, GoogleMap.OnMyLocationClickListener, OnMapReadyCallback {
 
     private GoogleMap mMap;
 
@@ -18,29 +29,69 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+
+        initToolBar();
+
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
 
+    private void initToolBar() {
+        Toolbar mToolbar = findViewById(R.id.toolbar_maps);
+        mToolbar.setTitle("Carte de votre consommation");
+        mToolbar.setNavigationIcon(R.drawable.ic_add_alert_black_24dp);
+        mToolbar.setNavigationOnClickListener(view -> {
+            startActivity(new Intent(this, DashboardActivity.class));
+            overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+        });
+    }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            mMap.setMyLocationEnabled(true);
+        }
+
+        mMap.setOnMyLocationButtonClickListener(this);
+        mMap.setOnMyLocationClickListener(this);
+
+        putMarkersOfFood();
+
+    }
+
+    private void putMarkersOfFood() {
+        getLocationsFromAllFoods().forEach(food -> {
+            mMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(food.getLatitude(), food.getLongitude()))
+                    .title(food.getName())
+                    .snippet(food.getQuantite() + " grammes")
+                    .flat(true));
+
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(food.getLatitude(), food.getLongitude()), 11.0f));
+
+        });
+
+
+    }
+
+    public ArrayList<Food> getLocationsFromAllFoods() {
+        ArrayList<Food> locations = new ArrayList<>();
+        for (Integer food : UserSingleton.getUser().getCalendarFoodList().keySet()) {
+            locations.addAll(UserSingleton.getUser().getCalendarFoodList().get(food).getDailyFood());
+        }
+        return locations;
+    }
+
+    @Override
+    public boolean onMyLocationButtonClick() {
+        return false;
+    }
+
+    @Override
+    public void onMyLocationClick(@NonNull Location location) {
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 11.0f));
     }
 }

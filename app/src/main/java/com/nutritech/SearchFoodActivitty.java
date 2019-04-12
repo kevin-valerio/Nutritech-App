@@ -19,10 +19,12 @@ import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.nutritech.models.Food;
 import com.nutritech.models.FoodList;
 import com.nutritech.models.FoodSuggestor;
+import com.nutritech.models.LocationService;
 import com.nutritech.models.UserSingleton;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Objects;
 
 public class SearchFoodActivitty extends AppCompatActivity {
 
@@ -42,14 +44,23 @@ public class SearchFoodActivitty extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_food_activity);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
+        initToolbar();
         initSearchView();
         initComponents();
 
         refreshStats();
 
+    }
+
+    private void initToolbar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
+        toolbar.setNavigationIcon(R.drawable.ic_add_alert_black_24dp);
+        toolbar.setNavigationOnClickListener(view -> {
+            startActivity(new Intent(this, DashboardActivity.class));
+            overridePendingTransition(R.anim.push_left_out, R.anim.push_left_in);
+        });
     }
 
     private void initComponents() {
@@ -168,8 +179,7 @@ public class SearchFoodActivitty extends AppCompatActivity {
     private void addFood() {
 
         if (canAddFood()) {
-            Calendar cal = Calendar.getInstance();
-            int currentDay = cal.get(Calendar.DAY_OF_MONTH);
+            int currentDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
 
             FoodList f;
             if (UserSingleton.getUser().getCalendarFoodList().containsKey(currentDay)) {
@@ -179,6 +189,9 @@ public class SearchFoodActivitty extends AppCompatActivity {
                 UserSingleton.getUser().getCalendarFoodList().put(currentDay, f);
             }
             try {
+                this.food.setLatitude(getLatitude());
+                this.food.setLongitude(getLongitude());
+
                 f.addFood(this.food, Long.parseLong(qtTxtView.getText().toString()));
             } catch (NumberFormatException e) {
                 return;
@@ -188,6 +201,18 @@ public class SearchFoodActivitty extends AppCompatActivity {
         } else {
             editText.setError("Vous ne pouvez rien ajouté sans avoir cherché un aliment");
         }
+    }
+
+    private double getLatitude() {
+
+        LocationService locationService = new LocationService(this);
+        return locationService.getLatitude();
+
+    }
+
+    private double getLongitude() {
+        LocationService locationService = new LocationService(this);
+        return locationService.getLongitude();
     }
 
     private boolean canAddFood() {

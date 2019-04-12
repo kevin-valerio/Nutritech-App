@@ -1,6 +1,8 @@
 package com.nutritech.models;
 
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 public class FoodList {
@@ -23,16 +25,17 @@ public class FoodList {
     /**
      * Add food and it's quantity to the foodList
      *
-     * @param foodToDel food to add
+     * @param food     food to add
      * @param quantity quantity of food
      */
-    public void addFood(Food foodToDel, long quantity) {
-        calorie = (calorie + ((foodToDel.getCalorie() * quantity) / 100));
-        carbs = (carbs + ((foodToDel.getCarb() * quantity) / 100));
-        proteins = (proteins + ((foodToDel.getProtein() * quantity) / 100));
-        lipid = (lipid + ((foodToDel.getLipid() * quantity) / 100));
-        foodToDel.setQuantite((int) quantity);
-        dailyFood.add(foodToDel);
+    public void addFood(Food food, long quantity) {
+        calorie = (calorie + ((food.getCalorie() * quantity) / 100));
+        carbs = (carbs + ((food.getCarb() * quantity) / 100));
+        proteins = (proteins + ((food.getProtein() * quantity) / 100));
+        lipid = (lipid + ((food.getLipid() * quantity) / 100));
+        food.setQuantite((int) quantity);
+        dailyFood.add(food);
+        Log.d("FOOD_LOATION", food.getLatitude() + " and " + food.getLongitude());
     }
 
     /**

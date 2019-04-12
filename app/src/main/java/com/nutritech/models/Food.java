@@ -1,12 +1,17 @@
 package com.nutritech.models;
 
 public class Food {
+
     private String name;
     private long protein;
     private long lipid;
     private long carb;
     private long calorie;
     private int quantite;
+
+    private double latitude;
+    private double longitude;
+
 
     public Food(String name, long protein, long lipid, long carb) {
         this.name = name;
@@ -68,6 +73,22 @@ public class Food {
 
     public void setCarb(long carb) {
         this.carb = carb;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 
     @Override

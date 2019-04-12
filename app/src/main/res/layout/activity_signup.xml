@@ -13,6 +13,8 @@
         android:paddingTop="56dp"
         android:paddingRight="24dp">
 
+
+        <!--TODO : Changer ce logo !-->
         <ImageView
             android:layout_width="364dp"
             android:layout_height="124dp"
