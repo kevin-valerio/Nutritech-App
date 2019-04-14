@@ -12,7 +12,7 @@
                     android:title="@string/real_tableau_de_bord" />
 
                 <item
-                    android:id="@+id/bilance_hebdo"
+                    android:id="@+id/bilan_hebdo"
                     android:icon="@drawable/baseline_filter_7_black_18dp"
                     android:title="@string/mon_bilan_hebdomadaire" />
                 <item

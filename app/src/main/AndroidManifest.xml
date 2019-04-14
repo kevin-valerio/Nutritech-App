@@ -63,6 +63,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MonthlyReportActivity"
+            android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".WeeklyReportActivity"
+            android:theme="@style/AppTheme"/>
+
     </application>
 
 </manifest>

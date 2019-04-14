@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.nutritech.models.UserSingleton;
@@ -144,13 +145,16 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         int id = item.getItemId();
 
         if (id == R.id.bilan_mensuel) {
+            startActivity(new Intent(this, MonthlyReportActivity.class));
+            finish();
 
         } else if (id == R.id.mapps) {
             startActivity(new Intent(this, MapsActivity.class));
             finish();
             overridePendingTransition(R.anim.push_left_out, R.anim.push_left_in);
-        } else if (id == R.id.bilance_hebdo) {
-
+        } else if (id == R.id.bilan_hebdo) {
+            startActivity(new Intent(this, WeeklyReportActivity.class));
+            finish();
         } else if (id == R.id.deconnection) {
             startActivity(new Intent(this, LoginActivity.class));
             finish();
