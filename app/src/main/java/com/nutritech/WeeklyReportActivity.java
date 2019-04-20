@@ -2,6 +2,7 @@ package com.nutritech;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -21,6 +22,7 @@ public class WeeklyReportActivity extends AppCompatActivity{
 
         initGraph();
         initToolBar();
+        initFloatingButton();
 
     }
 
@@ -46,6 +48,24 @@ public class WeeklyReportActivity extends AppCompatActivity{
         mToolbar.setNavigationOnClickListener(view -> {
             startActivity(new Intent(this, DashboardActivity.class));
             overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+        });
+    }
+
+    private void shareReport() {
+        Intent FBIntent = new Intent(Intent.ACTION_SEND);
+        FBIntent.setType("text/plain");
+        FBIntent.setPackage("com.facebook.katana");
+        FBIntent.putExtra(Intent.EXTRA_TEXT, "The text you wanted to share");
+        try {
+            startActivity(FBIntent);
+        } catch (android.content.ActivityNotFoundException ex) {
+        }
+    }
+
+    private void initFloatingButton() {
+        FloatingActionButton shareReport = findViewById(R.id.sharingButton);
+        shareReport.setOnClickListener(click -> {
+            shareReport();
         });
     }
 }
