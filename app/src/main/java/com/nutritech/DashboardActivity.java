@@ -32,6 +32,8 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         initNavigationView();
         initFloatingButton();
 
+        //Test comment
+
     }
 
 
