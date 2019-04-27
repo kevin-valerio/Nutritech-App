@@ -70,6 +70,9 @@
             android:name=".WeeklyReportActivity"
             android:theme="@style/AppTheme"/>
 
+        <receiver android:name=".Receiver.AlarmReceiver"></receiver>
+
+
     </application>
 
 </manifest>

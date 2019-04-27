@@ -1,5 +1,8 @@
 package com.nutritech;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -10,17 +13,25 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.nutritech.Receiver.AlarmReceiver;
 import com.nutritech.models.UserSingleton;
 import com.nutritech.models.WeightAlertBuilder;
 
+import java.util.Calendar;
+
 
 public class DashboardActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+
+    private PendingIntent pendingIntent;
 
 
     @Override
@@ -33,6 +44,12 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         initFloatingButton();
 
         //Test comment
+
+          /* Retrieve a PendingIntent that will perform a broadcast */
+        Intent alarmIntent = new Intent(this.getApplicationContext(), AlarmReceiver.class);
+        pendingIntent = PendingIntent.getBroadcast(this.getApplicationContext(), 0, alarmIntent, 0);
+
+        startNotificationAlarm();
 
     }
 
@@ -181,6 +198,36 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
 
 
         return true;
+    }
+
+    /**
+     * Start the alarm manager daily
+     */
+    public void startNotificationAlarm() {
+        AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+        /* Set the alarm to start at 15:32 AM */
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, 15);
+        calendar.set(Calendar.MINUTE, 29);
+        Log.d("d", "STAAAART");
+
+        // If the hour is past, add one day
+        if(calendar.before(Calendar.getInstance())){
+            calendar.add(Calendar.DATE,1);
+        }
+
+        manager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+    }
+
+    /**
+     * Cancel the alarm manager
+     */
+    public void cancelNotificationAlarm() {
+        AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        manager.cancel(pendingIntent);
+        Toast.makeText(this, "Alarm Canceled", Toast.LENGTH_SHORT).show();
     }
 
 }
