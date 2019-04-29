@@ -54,8 +54,8 @@ public class WeeklyReportActivity extends AppCompatActivity{
     private void shareReport() {
         Intent FBIntent = new Intent(Intent.ACTION_SEND);
         FBIntent.setType("text/plain");
-        FBIntent.setPackage("com.facebook.katana");
-        FBIntent.putExtra(Intent.EXTRA_TEXT, "The text you wanted to share");
+        FBIntent.setPackage("com.facebook.orca");
+        FBIntent.putExtra(Intent.EXTRA_TEXT, "Aujourd'hui j'ai mangé 2560 kcal ! J'ai atteint mon objectif de 2500 kcal.");
         try {
             startActivity(FBIntent);
         } catch (android.content.ActivityNotFoundException ex) {
