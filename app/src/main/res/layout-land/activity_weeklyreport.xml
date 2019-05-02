@@ -4,15 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:ignore="MissingConstraints">
+    android:layout_height="match_parent">
 
     <LinearLayout
-
         android:layout_width="match_parent"
-        android:layout_height="728dp"
-        android:orientation="vertical"
-       >
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/retour"
@@ -21,24 +18,9 @@
             android:background="?attr/colorPrimary" />
 
         <com.jjoe64.graphview.GraphView
-            android:id="@+id/monthlyGraph1"
+            android:id="@+id/weeklyGraph"
             android:layout_width="match_parent"
-            android:layout_height="220dp" />
-
-        <View
-            android:id="@+id/view4"
-            android:layout_width="match_parent"
-            android:layout_height="18dp" />
-
-        <com.jjoe64.graphview.GraphView
-            android:id="@+id/monthlyGraph2"
-            android:layout_width="match_parent"
-            android:layout_height="220dp" />
-
-        <View
-            android:id="@+id/view6"
-            android:layout_width="match_parent"
-            android:layout_height="18dp" />
+            android:layout_height="157dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -46,43 +28,45 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="286dp"
-                android:layout_height="124dp"
+                android:layout_width="615dp"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="300dp"
-                    android:layout_height="40dp"
+                    android:layout_width="350dp"
+                    android:layout_height="38dp"
                     android:layout_marginLeft="30dp"
                     android:background="@color/white"
                     android:fontFamily="sans-serif-light"
-                    android:text="Revue du coach:"
+                    android:text="Revue du coach :"
                     android:textColor="@color/base"
                     android:textSize="22dp" />
 
                 <TextView
-                    android:layout_width="300dp"
-                    android:layout_height="80dp"
+                    android:layout_width="350dp"
+                    android:layout_height="70dp"
                     android:layout_marginLeft="30dp"
 
                     android:background="@color/white" />
 
             </LinearLayout>
 
-            <View
-                android:id="@+id/view5"
-                android:layout_width="17dp"
-                android:layout_height="124dp" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
+                <View
+                    android:id="@+id/view3"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_weight="1" />
+
                 <android.support.design.widget.FloatingActionButton
-                    android:id="@+id/floatingActionButton"
+                    android:id="@+id/sharingButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:clickable="true"
                     app:srcCompat="@android:drawable/ic_menu_share" />
             </LinearLayout>

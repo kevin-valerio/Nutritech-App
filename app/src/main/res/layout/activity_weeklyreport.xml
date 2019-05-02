@@ -23,17 +23,17 @@
             android:layout_height="250dp" />
 
         <TextView
-            android:layout_width="350dp"
+            android:layout_width="304dp"
             android:layout_height="40dp"
             android:layout_marginLeft="30dp"
             android:background="@color/white"
-            android:fontFamily="casual"
-            android:text="Revue du coach:"
+            android:fontFamily="sans-serif-light"
+            android:text="Revue du coach :"
             android:textColor="@color/base"
-            android:textSize="30dp" />
+            android:textSize="22dp" />
 
         <TextView
-            android:layout_width="350dp"
+            android:layout_width="304dp"
             android:layout_height="150dp"
             android:layout_marginLeft="30dp"
 
