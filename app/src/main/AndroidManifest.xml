@@ -8,17 +8,14 @@
          location permissions for the 'MyLocation' functionality.
     -->
 
-
     <uses-permission android:name="android.permission. ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-
 
     <application
         android:allowBackup="true"
@@ -43,7 +40,7 @@
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
+            android:label="@string/title_activity_maps" />
         <activity android:name=".SearchFoodActivitty" />
         <activity
             android:name=".DashboardActivity"
@@ -65,14 +62,14 @@
         </activity>
         <activity
             android:name=".MonthlyReportActivity"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".WeeklyReportActivity"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
 
-        <receiver android:name=".Receiver.AlarmReceiver"></receiver>
+        <receiver android:name=".Receiver.AlarmReceiver" />
 
-
+        <activity android:name=".DailyConsumptionActivity"></activity>
     </application>
 
 </manifest>

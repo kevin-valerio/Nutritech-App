@@ -25,6 +25,11 @@
                     android:icon="@drawable/baseline_place_black_18dp"
                     android:title="@string/carte_de_ma_consommation" />
 
+                <item
+                    android:id="@+id/foodlist"
+                    android:icon="@drawable/baseline_place_black_18dp"
+                    android:title="Aliments consommés" />
+
             </menu>
         </item>
     </group>
