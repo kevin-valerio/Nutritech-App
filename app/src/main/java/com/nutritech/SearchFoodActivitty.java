@@ -120,21 +120,27 @@ public class SearchFoodActivitty extends AppCompatActivity {
                     editText.setError("Veuillez chercher un aliment");
                     return;
                 }
-
-                if (Integer.valueOf(editable.toString()) > 2000) {
-                    editText.setError("Avez-vous vraiment mangé tout cela ?");
-                    return;
+                if (!editable.toString().equals("")){
+                    if (Integer.valueOf(editable.toString()) > 2000) {
+                        editText.setError("Avez-vous vraiment mangé tout cela ?");
+                        return;
+                    }
                 }
+
+
 
                 if (!editable.toString().equals("")) {
                     Integer newGrammes = Integer.valueOf(editable.toString());
-                    String text = String.valueOf(newGrammes * food.getProtein()) + "";
+                    if (newGrammes == 0){
+                        newGrammes = 100;
+                    }
+                    String text = String.valueOf(newGrammes/100 * food.getProtein()) + "";
                     protLbl.setText(text);
-                    String text1 = String.valueOf(newGrammes * food.getCarb()) + " ";
+                    String text1 = String.valueOf(newGrammes/100 * food.getCarb()) + " ";
                     gluLbl.setText(text1);
-                    String text2 = String.valueOf(newGrammes * food.getLipid()) + " ";
+                    String text2 = String.valueOf(newGrammes/100 * food.getLipid()) + " ";
                     lipLbl.setText(text2);
-                    String text3 = String.valueOf(newGrammes * food.getCalorie()) + " ";
+                    String text3 = String.valueOf(newGrammes/100 * food.getCalorie()) + " ";
                     kcalLabel.setText(text3);
                 } else {
                     String text = "0";
@@ -156,7 +162,11 @@ public class SearchFoodActivitty extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 Snackbar.make(findViewById(R.id.container), "Voici les informations disponibles pour : " + query, Snackbar.LENGTH_SHORT).show();
-                installFood(query);
+                food = getFood(query);
+                if (food==null){
+                    return false;
+                }
+                installFood(food);
                 return false;
             }
 
@@ -174,11 +184,21 @@ public class SearchFoodActivitty extends AppCompatActivity {
         searchView.setSubmitOnClick(true);
     }
 
+    private Food getFood(String name) {
+        for (int i = 0; i < this.foodList.size(); i++) {
+            if (this.foodList.get(i).getName().equals(name)){
+                return this.foodList.get(i);
+            }
+        }
+        return null;
+    }
+
 
     //Initialise les textviews en fonction du food
-    private void installFood(String food) {
 
-        this.food = FoodSuggestor.getFoodByName(food);
+    private void installFood(Food food) {
+
+        this.food = food;
 
         if (this.food != null) {
             mainLabel.setText(this.food.getName());
