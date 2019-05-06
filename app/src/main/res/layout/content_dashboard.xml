@@ -6,13 +6,50 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".DashboardActivity"
+    tools:layout_editor_absoluteY="56dp"
     tools:showIn="@layout/app_bar_dashboard">
 
-    <!--<fragment-->
-    <!--android:id="@+id/search_bar"-->
-    <!--android:name="com.nutritech.SearchBarFragment"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_marginTop="15dp" />-->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="62dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
+        <TextView
+            android:id="@+id/calorie"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="0 / 2100 kcal"
+            android:textAlignment="center"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/proteine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Protéines : 0 / 34 g"
+            android:textAlignment="center"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/lipide"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lipides : 0 / 34 g"
+            android:textAlignment="center"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/glucide"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Glucides : 0 / 34 g"
+            android:textAlignment="center"
+            android:textSize="24sp" />
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>

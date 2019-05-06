@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nutritech.Receiver.AlarmReceiver;
+import com.nutritech.models.FoodList;
 import com.nutritech.models.UserSingleton;
 import com.nutritech.models.WeightAlertBuilder;
 
@@ -32,6 +33,15 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
 
 
     private PendingIntent pendingIntent;
+    private String kcal;
+    private String glu;
+    private String prot;
+    private String lip;
+    private TextView calorie;
+    private TextView glucide;
+    private TextView proteine;
+    private TextView lipide;
+
 
 
     @Override
@@ -50,6 +60,22 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         pendingIntent = PendingIntent.getBroadcast(this.getApplicationContext(), 0, alarmIntent, 0);
 
         startNotificationAlarm();
+
+        Calendar calendar = Calendar.getInstance();
+        FoodList currentfoodList = UserSingleton.getUser().getCalendarFoodList().get(calendar.get(Calendar.DAY_OF_MONTH));
+        kcal = currentfoodList.getCalorie() + " / " + UserSingleton.getUser().getKcal() + " kcal";
+        lip = currentfoodList.getLipid() + " / " + UserSingleton.getUser().getObjLipides() + " g";
+        glu = currentfoodList.getCarbs() + " / " + UserSingleton.getUser().getObjGlucides() + " g";
+        prot = currentfoodList.getProteins() + " / " + UserSingleton.getUser().getObjProteines() + " g";
+        calorie = findViewById(R.id.calorie);
+        proteine = findViewById(R.id.proteine);
+        lipide = findViewById(R.id.lipide);
+        glucide = findViewById(R.id.glucide);
+        glucide.setText(glu);
+        proteine.setText(prot);
+        calorie.setText(kcal);
+        lipide.setText(lip);
+
 
     }
 

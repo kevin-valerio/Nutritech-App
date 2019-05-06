@@ -33,6 +33,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -131,16 +132,18 @@ public class SearchFoodActivitty extends AppCompatActivity {
 
                 if (!editable.toString().equals("")) {
                     Integer newGrammes = Integer.valueOf(editable.toString());
-                    if (newGrammes == 0){
-                        newGrammes = 100;
-                    }
-                    String text = String.valueOf(newGrammes/100 * food.getProtein()) + "";
+                    float prot = (((float) newGrammes / 100) * food.getProtein());
+                    DecimalFormat df = new DecimalFormat("0.00");
+                    String text = df.format(prot) + "";
                     protLbl.setText(text);
-                    String text1 = String.valueOf(newGrammes/100 * food.getCarb()) + " ";
+                    float carb = (((float) newGrammes / 100) * food.getCarb());
+                    String text1 = df.format(carb) + "";
                     gluLbl.setText(text1);
-                    String text2 = String.valueOf(newGrammes/100 * food.getLipid()) + " ";
+                    float lip = (((float) newGrammes / 100) * food.getLipid());
+                    String text2 = df.format(lip) + "";
                     lipLbl.setText(text2);
-                    String text3 = String.valueOf(newGrammes/100 * food.getCalorie()) + " ";
+                    float calo = (((float) newGrammes / 100) * food.getCalorie());
+                    String text3 = df.format(calo) + "";
                     kcalLabel.setText(text3);
                 } else {
                     String text = "0";
@@ -363,7 +366,7 @@ public class SearchFoodActivitty extends AppCompatActivity {
         a[1] = a[1].replaceAll("kcal", "");
         a[1] = a[1].replaceAll("g", "");
         String[] b = a[1].split("\\|");
-        return new Food(name, Float.valueOf(b[3].trim()).longValue(), Float.valueOf(b[2].trim()).longValue(), Float.valueOf(b[1].trim()).longValue());
+        return new Food(name, Float.valueOf(b[3].trim()).longValue(), Float.valueOf(b[1].trim()).longValue(), Float.valueOf(b[2].trim()).longValue());
 
 
     }
