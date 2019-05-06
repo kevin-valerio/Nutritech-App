@@ -25,7 +25,6 @@ import com.android.volley.toolbox.Volley;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.nutritech.models.Food;
 import com.nutritech.models.FoodList;
-import com.nutritech.models.FoodSuggestor;
 import com.nutritech.models.LocationService;
 import com.nutritech.models.UserSingleton;
 
@@ -242,12 +241,15 @@ public class SearchFoodActivitty extends AppCompatActivity {
             } else {
                 f = new FoodList();
                 UserSingleton.getUser().getCalendarFoodList().put(currentDay, f);
+
             }
             try {
                 this.food.setLatitude(getLatitude());
                 this.food.setLongitude(getLongitude());
 
                 f.addFood(this.food, Long.parseLong(qtTxtView.getText().toString()));
+                UserSingleton.getUser().eat(this.food);
+
             } catch (NumberFormatException e) {
                 return;
             }

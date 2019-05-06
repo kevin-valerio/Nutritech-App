@@ -17,7 +17,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -204,12 +203,13 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
             startActivity(new Intent(this, LoginActivity.class));
             finish();
             overridePendingTransition(R.anim.push_left_out, R.anim.push_left_in);
-        }else if (id == R.id.foodlist) {
-            //startActivity(new Intent(this, FoodRecyclerActivity.class));
-            startActivity(new Intent(this, DailyConsumptionActivity.class));
-            finish();
-            overridePendingTransition(R.anim.push_left_out, R.anim.push_left_in);
         }
+//        else if (id == R.id.) {
+//            startActivity(new Intent(this, FoodRecyclerActivity.class));
+//            startActivity(new Intent(this, DailyConsumptionActivity.class));
+//            finish();
+//            overridePendingTransition(R.anim.push_left_out, R.anim.push_left_in);
+//        }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

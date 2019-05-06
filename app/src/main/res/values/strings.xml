@@ -48,4 +48,8 @@
     <string name="real_tableau_de_bord">Tableau de bord</string>
     <string name="title_activity_maps">Map</string>
     <string name="carte_de_ma_consommation">Carte de ma consommation</string>
+    <string name="plat_et_ou_ingr_dient">Plat et/ou ingrédient</string>
+    <string name="lieu">Lieu</string>
+    <string name="calories">Calories</string>
+    <string name="aliments_consomm_s">Aliments consommés</string>
 </resources>
