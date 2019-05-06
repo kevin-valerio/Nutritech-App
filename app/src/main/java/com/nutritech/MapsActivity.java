@@ -116,18 +116,13 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
 
     private String getCityOfLocalisation(double latitude, double longitude) {
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
-        List<Address> addresses;
-        String cityName = null;
-        String countryName = null;
+        List<Address> addresses = new ArrayList<>();
         try {
             addresses = geocoder.getFromLocation(latitude, longitude, 1);
-            cityName = addresses.get(0).getAddressLine(0);
-            countryName = addresses.get(0).getAddressLine(2);
-
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return cityName.concat(", ").concat(countryName);
+        return addresses.get(0).getLocality().concat(", ").concat(addresses.get(0).getCountryName());
     }
 
     private TextView getTextView(String content, int i) {
