@@ -1,6 +1,7 @@
 package com.nutritech.models;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AlertDialog;
 import android.text.InputType;
@@ -10,7 +11,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.nutritech.DashboardActivity;
 import com.nutritech.R;
+
+import static android.support.v4.content.ContextCompat.startActivity;
+
 
 public class WeightAlertBuilder {
 
@@ -42,6 +47,9 @@ public class WeightAlertBuilder {
         poids.setInputType(InputType.TYPE_CLASS_NUMBER);
         poids.setHint("Poids (en kg)");
         poids.setShowSoftInputOnFocus(true);
+        poids.setTextColor(Color.BLACK);
+        poids.setPadding(5, 0, 0, 0);
+        poids.setCursorVisible(true);
         layout.addView(poids);
     }
 
@@ -59,6 +67,8 @@ public class WeightAlertBuilder {
         builder.setPositiveButton("Ajouter", (dialog, which) -> {
                     UserSingleton.getUser().addWeight(Integer.valueOf(poids.getText().toString()));
                     Toast.makeText(context, "Votre nouveau poids a été ajouté (" + poids.getText().toString() + " kg)", Toast.LENGTH_LONG).show();
+            startActivity(context, new Intent(context, DashboardActivity.class), null);
+
                 }
         );
 

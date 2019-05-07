@@ -37,4 +37,6 @@
     <color name="delete">#961111</color>
     <color name="tableRowCOlor">#CAADFF</color>
     <color name="realTableRowColor">#E4D5FF</color>
+    <color name="important">#D32F2F</color>
+    <color name="medium">#F57C00</color>
 </resources>

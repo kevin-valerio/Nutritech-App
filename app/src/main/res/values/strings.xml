@@ -52,4 +52,10 @@
     <string name="lieu">Lieu</string>
     <string name="calories">Calories</string>
     <string name="aliments_consomm_s">Aliments consommés</string>
+    <string name="glucides">Glucides</string>
+    <string name="lipides">Lipides</string>
+    <string name="prot_ines">Protéines</string>
+    <string name="_550_1100_kcal">550 / 1100 kcal</string>
+    <string name="calories_consomm_es">Calories consommées :</string>
+    <string name="_0_34_g">0 / 34 g</string>
 </resources>
