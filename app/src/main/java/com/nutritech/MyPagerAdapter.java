@@ -4,6 +4,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import com.nutritech.Fragments.FoodConsumptionFragment;
+import com.nutritech.Fragments.NutrientConsumptionFragment;
+
 /**
  * Created by alexislefebvre on 02/05/2019.
  */

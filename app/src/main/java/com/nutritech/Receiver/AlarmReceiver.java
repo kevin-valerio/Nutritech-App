@@ -20,11 +20,20 @@ import com.nutritech.WeeklyReportActivity;
 public class AlarmReceiver extends BroadcastReceiver {
 
     private static final String DEBUG_TAG = "AlarmReceiver";
+    private static final String SERVICE_BROADCAST_KEY = "starterService";
+    final static int RQS_STOP_SERVICE = 1;
+    final static int RQS_SEND_SERVICE = 2;
 
     @Override
     public void onReceive(Context context, Intent intent) {
         // start the notification
-        sendNotification("Aliments consommés aujourd'hui","Pensez à renseignez les aliments que vous avez consommé",context);
+        NotificationManager notificationManager = null;
+        int rqs = intent.getIntExtra(SERVICE_BROADCAST_KEY,0);
+        if(rqs == RQS_STOP_SERVICE){
+        }
+        if (rqs == RQS_SEND_SERVICE){
+            sendNotification("Aliments consommés aujourd'hui","Pensez à renseignez les aliments que vous avez consommé",context);
+        }
 
     }
 

@@ -1,13 +1,187 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.nutritech.NutrientConsumptionFragment">
+    >
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+
+        android:id="@+id/linearKcal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="50dp">
 
-</FrameLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="150dp"
+            android:background="@color/orange"
+
+            >
+
+            <ImageView
+
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="50dp"
+                app:srcCompat="@drawable/meal" />
+
+            <TextView android:layout_height="20dp"
+                android:layout_width="match_parent"
+                android:text="CALORIES"
+                android:layout_alignParentStart="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="40dp"
+                android:gravity="center"
+                android:textSize="15sp"
+                />
+
+            <TextView
+                android:id="@+id/kcalTxt"
+                android:layout_height="50dp"
+                android:layout_width="match_parent"
+                android:text="0"
+                android:layout_alignParentStart="true"
+                android:layout_centerHorizontal="true"
+
+                android:layout_marginTop="60dp"
+
+                android:gravity="center"
+                android:textSize="35sp"
+                />
+
+
+
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/linearTop"
+        android:layout_below="@id/linearKcal">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            >
+
+
+            <TextView android:layout_height="20dp"
+                android:layout_width="match_parent"
+                android:text="PROTÉINES"
+
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="20dp"
+
+
+                android:gravity="center"
+                android:textSize="15sp"
+                />
+
+            <TextView
+                android:id="@+id/proteinsTxt"
+                android:layout_height="50dp"
+                android:layout_width="match_parent"
+                android:text="0"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+
+
+                android:layout_marginTop="20dp"
+
+                android:gravity="center"
+                android:textSize="35sp"
+                />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            >
+
+
+            <TextView android:layout_height="20dp"
+                android:layout_width="match_parent"
+                android:text="GLUCIDES"
+
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="20dp"
+
+
+                android:gravity="center"
+                android:textSize="15sp"
+                />
+
+            <TextView
+                android:id="@+id/carbsTxt"
+                android:layout_height="50dp"
+                android:layout_width="match_parent"
+                android:text="0"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+
+
+                android:layout_marginTop="20dp"
+
+                android:gravity="center"
+                android:textSize="35sp"
+                />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            >
+
+
+            <TextView
+                android:layout_height="20dp"
+                android:layout_width="match_parent"
+                android:text="LIPIDES"
+
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="20dp"
+
+
+                android:gravity="center"
+                android:textSize="15sp"
+                />
+
+            <TextView
+                android:id="@+id/lipidesTxt"
+                android:layout_height="50dp"
+                android:layout_width="match_parent"
+                android:text="0"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+
+
+                android:layout_marginTop="20dp"
+
+                android:gravity="center"
+                android:textSize="35sp"
+                />
+
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>

@@ -15,6 +15,7 @@ import com.nutritech.models.Food;
 import com.nutritech.models.FoodList;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static java.lang.Math.round;
 
@@ -25,7 +26,7 @@ import static java.lang.Math.round;
 public class FoodRecyclerAdapter extends RecyclerView.Adapter<FoodRecyclerAdapter.MyViewHolder> {
 
     private Context context;
-    private ArrayList<Food> dataSet;
+    private List<Food> dataSet;
 
 
     private Integer[] tab_images_pour_la_liste = {
@@ -73,7 +74,7 @@ public class FoodRecyclerAdapter extends RecyclerView.Adapter<FoodRecyclerAdapte
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public FoodRecyclerAdapter(Context context, ArrayList<Food> foodList) {
+    public FoodRecyclerAdapter(Context context, List<Food> foodList) {
         this.context =  context;
         dataSet = foodList;
     }
@@ -119,6 +120,7 @@ public class FoodRecyclerAdapter extends RecyclerView.Adapter<FoodRecyclerAdapte
 
 
     }
+
 
     public void restoreFood(Food food,int position){
         dataSet.add(position,food);

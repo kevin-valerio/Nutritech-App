@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nutritech.Receiver.AlarmReceiver;
+import com.nutritech.Services.StarterService;
 import com.nutritech.models.UserSingleton;
 import com.nutritech.models.WeightAlertBuilder;
 
@@ -30,8 +31,11 @@ import java.util.Calendar;
 
 public class DashboardActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-
-    private PendingIntent pendingIntent;
+    private StarterService mBoundService;
+    private static final String TAG = "NotifyActivity";
+    final static String SERVICE_RECEIVER = "alarmReceiver";
+    final static String SERVICE_BROADCAST_KEY = "starterService";
+    final static int RQS_SEND_SERVICE = 2;
 
 
     @Override
@@ -43,14 +47,12 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         initNavigationView();
         initFloatingButton();
 
-        //Test comment
+        startService(new Intent(this, StarterService.class));
 
-          /* Retrieve a PendingIntent that will perform a broadcast */
-        Intent alarmIntent = new Intent(this.getApplicationContext(), AlarmReceiver.class);
-        pendingIntent = PendingIntent.getBroadcast(this.getApplicationContext(), 0, alarmIntent, 0);
-
-        startNotificationAlarm();
-
+        Intent intent = new Intent();
+        intent.setAction(SERVICE_RECEIVER);
+        intent.putExtra(SERVICE_BROADCAST_KEY,RQS_SEND_SERVICE);
+        sendBroadcast(intent);
     }
 
 
@@ -64,7 +66,6 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
 
     //Demande à l'utilisateur son nouveau poids
     public void askForWeight() {
-
 
 /*        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.Theme_AppCompat_Light_Dialog_Alert);
       builder.setTitle("Title");
@@ -200,39 +201,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
             overridePendingTransition(R.anim.push_left_out, R.anim.push_left_in);
             return true;
         });
-
-
         return true;
-    }
-
-    /**
-     * Start the alarm manager daily
-     */
-    public void startNotificationAlarm() {
-        AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-
-        /* Set the alarm to start at 15:32 AM */
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, 15);
-        calendar.set(Calendar.MINUTE, 29);
-        Log.d("d", "STAAAART");
-
-        // If the hour is past, add one day
-        if(calendar.before(Calendar.getInstance())){
-            calendar.add(Calendar.DATE,1);
-        }
-
-        manager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
-    }
-
-    /**
-     * Cancel the alarm manager
-     */
-    public void cancelNotificationAlarm() {
-        AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        manager.cancel(pendingIntent);
-        Toast.makeText(this, "Alarm Canceled", Toast.LENGTH_SHORT).show();
     }
 
 }

@@ -1,21 +1,34 @@
-package com.nutritech;
+package com.nutritech.Fragments;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.nutritech.FoodRecyclerAdapter;
 import com.nutritech.Helpers.RecyclerItemTouchHelper;
 import com.nutritech.Helpers.RecyclerItemTouchHelperListener;
+import com.nutritech.R;
+import com.nutritech.models.DateSelectorViewModel;
 import com.nutritech.models.Food;
 import com.nutritech.models.FoodList;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.List;
+
+import static com.nutritech.models.UserSingleton.getUser;
 
 
 /**
@@ -27,6 +40,8 @@ public class FoodConsumptionFragment extends Fragment implements RecyclerItemTou
     private FoodRecyclerAdapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private FoodList foodList;
+    private List<Food> data;
+    private DateSelectorViewModel mViewModel;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -41,6 +56,8 @@ public class FoodConsumptionFragment extends Fragment implements RecyclerItemTou
         foodList.getDailyFood().add(new Food("Pomme", 20, 40, 50));
         foodList.getDailyFood().add(new Food("Poire", 41, 18, 22));
 
+        this.data = foodList.getDailyFood();
+
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
@@ -53,7 +70,7 @@ public class FoodConsumptionFragment extends Fragment implements RecyclerItemTou
         recyclerView.addItemDecoration(new DividerItemDecoration(rootView.getContext(),DividerItemDecoration.VERTICAL));
 
         // specify an adapter (see also next example)
-        mAdapter = new FoodRecyclerAdapter(rootView.getContext(),foodList.getDailyFood());
+        mAdapter = new FoodRecyclerAdapter(rootView.getContext(),this.data);
         recyclerView.setAdapter(mAdapter);
 
         ItemTouchHelper.SimpleCallback itemTouchHelperCallBack = new RecyclerItemTouchHelper(0,ItemTouchHelper.LEFT,this);
@@ -74,5 +91,34 @@ public class FoodConsumptionFragment extends Fragment implements RecyclerItemTou
         }
 
     }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        mViewModel = ViewModelProviders.of(getActivity()).get(DateSelectorViewModel.class);
+
+        mViewModel.getDate().observe(this, new Observer<Calendar>() {
+            @Override
+            public void onChanged(@Nullable Calendar calendar) {
+
+                Log.d("ook",calendar.get(Calendar.DAY_OF_MONTH)+"/"+calendar.get(Calendar.MONTH)+"/"+calendar.get(Calendar.YEAR));
+                // clear old list
+                data.clear();
+
+                // if there is a food list update the data
+                if(getUser().getCalendarFoodList().containsKey(calendar)){
+                    foodList = getUser().getCalendarFoodList().get(calendar);
+                     data.addAll(foodList.getDailyFood());
+
+                }
+                // notify adapter
+                mAdapter.notifyDataSetChanged();
+            }
+        });
+
+
+    }
+
 }
 
