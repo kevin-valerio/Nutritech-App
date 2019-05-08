@@ -23,6 +23,7 @@ import com.nutritech.R;
 import com.nutritech.models.DateSelectorViewModel;
 import com.nutritech.models.Food;
 import com.nutritech.models.FoodList;
+import com.nutritech.models.UserSingleton;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -86,8 +87,12 @@ public class FoodConsumptionFragment extends Fragment implements RecyclerItemTou
             String name = foodList.getDailyFood().get(viewHolder.getAdapterPosition()).getName();
             Food deletedFood = foodList.getDailyFood().get(viewHolder.getAdapterPosition());
 
+            foodList.removeItem(position);
+
             int deleteIndex = viewHolder.getAdapterPosition();
             mAdapter.removeFood(deleteIndex);
+            mViewModel.setDate(mViewModel.getDate().getValue());
+
         }
 
     }
@@ -102,13 +107,13 @@ public class FoodConsumptionFragment extends Fragment implements RecyclerItemTou
             @Override
             public void onChanged(@Nullable Calendar calendar) {
 
-                Log.d("ook",calendar.get(Calendar.DAY_OF_MONTH)+"/"+calendar.get(Calendar.MONTH)+"/"+calendar.get(Calendar.YEAR));
+              //  Log.d("RECEIVED",calendar.get(Calendar.DAY_OF_MONTH)+"/"+calendar.get(Calendar.MONTH)+"/"+calendar.get(Calendar.YEAR));
                 // clear old list
                 data.clear();
 
                 // if there is a food list update the data
-                if(getUser().getCalendarFoodList().containsKey(calendar)){
-                    foodList = getUser().getCalendarFoodList().get(calendar);
+                if(getUser().getCalendarFoodList().containsKey(calendar.get(Calendar.DAY_OF_MONTH))){
+                    foodList = UserSingleton.getUser().getCalendarFoodList().get(calendar.get(Calendar.DAY_OF_MONTH));
                      data.addAll(foodList.getDailyFood());
 
                 }

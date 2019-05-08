@@ -64,17 +64,19 @@ public class StarterService extends Service {
         calendar.setTimeInMillis(System.currentTimeMillis());
         calendar.set(Calendar.HOUR_OF_DAY, 15);
         calendar.set(Calendar.MINUTE, 30);
-        Log.d("d", "STAAAART");
 
         // If the hour is past, add one day
         if(calendar.before(Calendar.getInstance())){
             calendar.add(Calendar.DATE,1);
         }
 
+
+
         /* Retrieve a PendingIntent that will perform a broadcast */
         Intent alarmIntent = new Intent(this.getApplicationContext(), AlarmReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this.getApplicationContext(), 0, alarmIntent, 0);
-        manager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+
+        manager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY,pendingIntent);
     }
 }
 

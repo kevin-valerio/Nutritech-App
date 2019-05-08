@@ -12,12 +12,85 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary" />
 
-    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <fragment xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="659dp"
+        android:layout_height="370dp"
         tools:context=".MapsActivity" />
+
+    <TableLayout
+        android:id="@+id/tableCalories"
+        android:layout_width="match_parent"
+        android:layout_height="272dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="100dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <TableRow
+            android:layout_width="398dp"
+            android:layout_height="match_parent"
+            android:background="@color/tableRowCOlor"
+            android:gravity="bottom|center"
+            android:padding="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/plat_et_ou_ingr_dient"
+                android:textAlignment="center"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="111dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/lieu"
+                android:textAlignment="center"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/calories"
+                android:textAlignment="center"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <!--<TableRow-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:background="@color/realTableRowColor"-->
+        <!--android:padding="5dp">-->
+
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="1"-->
+        <!--android:text="1"-->
+        <!--android:textAlignment="center"-->
+        <!--android:textColor="@color/primary_dark" />-->
+
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="1"-->
+        <!--android:text="Suresh Dasari"-->
+        <!--android:textAlignment="center"-->
+        <!--android:textColor="@color/primary_dark" />-->
+
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="1"-->
+        <!--android:text="Hyderabad"-->
+        <!--android:textAlignment="center"-->
+
+        <!--android:textColor="@color/primary_dark" />-->
+        <!--</TableRow>-->
+    </TableLayout>
 
 </android.support.design.widget.AppBarLayout>

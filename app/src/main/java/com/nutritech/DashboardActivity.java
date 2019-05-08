@@ -4,9 +4,11 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -17,11 +19,15 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
+import com.jjoe64.graphview.series.Series;
 import com.nutritech.Receiver.AlarmReceiver;
+import com.nutritech.models.FoodList;
 import com.nutritech.Services.StarterService;
 import com.nutritech.models.UserSingleton;
 import com.nutritech.models.WeightAlertBuilder;
@@ -37,6 +43,18 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
     final static String SERVICE_BROADCAST_KEY = "starterService";
     final static int RQS_SEND_SERVICE = 2;
 
+    private PendingIntent pendingIntent;
+    private String kcal;
+    private String glu;
+    private String prot;
+    private String lip;
+    private TextView calorie;
+    private TextView glucide;
+    private TextView proteine;
+    private TextView lipide;
+    private ProgressBar progressBar;
+    private GraphView graphView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,15 +64,83 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         initToolBar();
         initNavigationView();
         initFloatingButton();
+        initProgressBar();
+        initChartWithWeight();
+
+        /* Retrieve a PendingIntent that will perform a broadcast */
+       // Intent alarmIntent = new Intent(this.getApplicationContext(), AlarmReceiver.class);
+       // pendingIntent = PendingIntent.getBroadcast(this.getApplicationContext(), 0, alarmIntent, 0);
 
         startService(new Intent(this, StarterService.class));
 
+
+        Calendar calendar = Calendar.getInstance();
+        FoodList currentfoodList = UserSingleton.getUser().getCalendarFoodList().get(calendar.get(Calendar.DAY_OF_MONTH));
+        kcal = currentfoodList.getCalorie() + " / " + UserSingleton.getUser().getKcal() + " kcal";
+        lip = currentfoodList.getLipid() + " / " + UserSingleton.getUser().getObjLipides() + " g";
+        glu = currentfoodList.getCarbs() + " / " + UserSingleton.getUser().getObjGlucides() + " g";
+        prot = currentfoodList.getProteins() + " / " + UserSingleton.getUser().getObjProteines() + " g";
+        calorie = findViewById(R.id.calorie);
+        proteine = findViewById(R.id.proteine);
+        lipide = findViewById(R.id.lipide);
+        glucide = findViewById(R.id.glucide);
+        glucide.setText(glu);
+        proteine.setText(prot);
+        calorie.setText(kcal);
+        lipide.setText(lip);
+
+    }
+
+    private void initChartWithWeight() {
+        graphView = findViewById(R.id.dashboardGraph);
+        graphView.setTitle("Evolution de votre poids");
+        Series series = new LineGraphSeries<>();
+        ((LineGraphSeries) series).appendData(new DataPoint(1, 0), false, 999);
+        ((LineGraphSeries) series).setTitle("Poids (en kg)");
+        UserSingleton.getUser().getWeights().forEach(weight -> ((LineGraphSeries) series).appendData(new DataPoint(series.getHighestValueX() + 1, weight), false, 999));
+        ((LineGraphSeries) series).setColor(Color.parseColor("#e5def4"));
+        ((LineGraphSeries) series).setThickness(10);
+        graphView.addSeries(series);
+    }
+
+    private void initProgressBar() {
+
+        int todaysCalories = Math.toIntExact(UserSingleton.getUser().getCalendarFoodList().get(Calendar.getInstance().get(Calendar.DAY_OF_MONTH)).getCalorie());
+
+        this.progressBar = findViewById(R.id.progressBar);
+        int progressValue = (int) ((todaysCalories / UserSingleton.getUser().getKcal()) * 100);
+        progressBar.setSecondaryProgress(progressValue);
+
+        if (progressValue > 50 && progressValue < 75) {
+            progressBar.setSecondaryProgressTintList(ContextCompat.getColorStateList(this, R.color.medium));
+        } else if (progressValue > 75) {
+            progressBar.setSecondaryProgressTintList(ContextCompat.getColorStateList(this, R.color.important));
+        } else if (progressValue < 50) {
+            progressBar.setSecondaryProgressTintList(ContextCompat.getColorStateList(this, R.color.primary_darker));
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initProgressBar();
         Intent intent = new Intent();
         intent.setAction(SERVICE_RECEIVER);
         intent.putExtra(SERVICE_BROADCAST_KEY,RQS_SEND_SERVICE);
         sendBroadcast(intent);
     }
 
+    @Override
+    protected void onResumeFragments() {
+        super.onResumeFragments();
+        initProgressBar();
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        initProgressBar();
+    }
 
     //Initialise le FloatinButton
     private void initFloatingButton() {

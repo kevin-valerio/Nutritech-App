@@ -39,16 +39,21 @@ public class DateSelectorFragment extends DialogFragment implements DatePickerDi
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-        mViewModel = ViewModelProviders.of(getActivity()).get(DateSelectorViewModel.class);
-        mViewModel.setDate(Calendar.getInstance());
-        mViewModel.incrementDate();
-
         Locale.setDefault(Locale.FRANCE);
 
         Calendar cal = Calendar.getInstance();
+
+        mViewModel = ViewModelProviders.of(getActivity()).get(DateSelectorViewModel.class);
+        if(mViewModel != null){
+            cal = mViewModel.getDate().getValue();
+
+        }
+
         int year = cal.get(Calendar.YEAR);
         int month = cal.get(Calendar.MONTH);
         int day = cal.get(Calendar.DAY_OF_MONTH);
+        Log.d("NEW",cal.get(Calendar.DAY_OF_MONTH)+"");
+
         return new DatePickerDialog(getActivity(),this,year,month,day);
     }
 
@@ -66,10 +71,6 @@ public class DateSelectorFragment extends DialogFragment implements DatePickerDi
         this.textDate.setText(formatted);
 
         mViewModel = ViewModelProviders.of(getActivity()).get(DateSelectorViewModel.class);
-        mViewModel.setDate(Calendar.getInstance());
-        mViewModel.incrementDate();
-
-
 
         return v;
     }
@@ -86,6 +87,7 @@ public class DateSelectorFragment extends DialogFragment implements DatePickerDi
         SimpleDateFormat format1 = new SimpleDateFormat("dd/MM/yyyy");
         String formatted = format1.format(cal.getTime());
         btn.setText(formatted);
+        Log.d("DATE",cal.get(Calendar.DAY_OF_MONTH)+"");
         mViewModel.setDate(cal);
 
     }

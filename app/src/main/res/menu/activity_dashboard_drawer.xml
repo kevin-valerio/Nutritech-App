@@ -27,8 +27,8 @@
 
                 <item
                     android:id="@+id/foodlist"
-                    android:icon="@drawable/baseline_place_black_18dp"
-                    android:title="Aliments consommés" />
+                    android:icon="@drawable/baseline_fastfood_black_18dp"
+                    android:title="@string/aliments_consomm_s" />
 
             </menu>
         </item>

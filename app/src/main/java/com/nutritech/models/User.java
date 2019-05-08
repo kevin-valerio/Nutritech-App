@@ -18,6 +18,7 @@ public class User {
     private int height;
     private double kcal;
     private int age;
+    private ArrayList<Food> eatenFood = new ArrayList<>();
     private String gender;
     private HashMap<Integer, FoodList> calendarFoodList;
 
@@ -27,8 +28,8 @@ public class User {
 
         initDatas("a@a.aa", "a@a.aa", Goal.PERTE_DE_MASSE, 80, 180, 12, "Homme", "a@a.aa", "a@a.aa");
 
-        //FIN MOCKUP
     }
+
 
     /**
      * Create a user
@@ -41,6 +42,7 @@ public class User {
      * @param age       user's age
      * @param gender    user's gender
      */
+
 
     public User(String firstname, String lastname, Goal goal, int weight, int height, int age, String gender, String mail, String password) {
         initDatas(firstname, lastname, goal, weight, height, age, gender, mail, password);
@@ -178,6 +180,16 @@ public class User {
     public void setKcal(double kcal) {
         this.kcal = kcal;
     }
+
+    public ArrayList<Food> getEatenFood() {
+        return eatenFood;
+    }
+
+    public void eat(Food food) {
+        this.eatenFood.add(food);
+    }
+
+
 
     /**
      * Add a weight to the user

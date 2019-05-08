@@ -16,6 +16,10 @@ public class DateSelectorViewModel extends ViewModel {
      * @return
      */
     public LiveData<Calendar> getDate(){
+        if(this.calendar.getValue() == null){
+            this.calendar.setValue(Calendar.getInstance());
+        }
+
         return this.calendar;
     }
 
@@ -27,19 +31,4 @@ public class DateSelectorViewModel extends ViewModel {
         calendar.setValue(cal);
     }
 
-    /**
-     * Increment the stored date
-     */
-    public void incrementDate(){// TODO : may not work
-        calendar.getValue().add(Calendar.DATE, 1);
-
-    }
-
-    /**
-     * Decrement the stored date
-     */
-    public void decrementDate(){
-        calendar.getValue().add(Calendar.DATE, -1);
-
-    }
 }

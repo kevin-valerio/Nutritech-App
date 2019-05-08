@@ -25,7 +25,6 @@ import com.android.volley.toolbox.Volley;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.nutritech.models.Food;
 import com.nutritech.models.FoodList;
-import com.nutritech.models.FoodSuggestor;
 import com.nutritech.models.LocationService;
 import com.nutritech.models.UserSingleton;
 
@@ -33,6 +32,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -120,21 +120,29 @@ public class SearchFoodActivitty extends AppCompatActivity {
                     editText.setError("Veuillez chercher un aliment");
                     return;
                 }
-
-                if (Integer.valueOf(editable.toString()) > 2000) {
-                    editText.setError("Avez-vous vraiment mangé tout cela ?");
-                    return;
+                if (!editable.toString().equals("")){
+                    if (Integer.valueOf(editable.toString()) > 2000) {
+                        editText.setError("Avez-vous vraiment mangé tout cela ?");
+                        return;
+                    }
                 }
+
+
 
                 if (!editable.toString().equals("")) {
                     Integer newGrammes = Integer.valueOf(editable.toString());
-                    String text = String.valueOf(newGrammes * food.getProtein()) + "";
+                    float prot = (((float) newGrammes / 100) * food.getProtein());
+                    DecimalFormat df = new DecimalFormat("0.00");
+                    String text = df.format(prot) + "";
                     protLbl.setText(text);
-                    String text1 = String.valueOf(newGrammes * food.getCarb()) + " ";
+                    float carb = (((float) newGrammes / 100) * food.getCarb());
+                    String text1 = df.format(carb) + "";
                     gluLbl.setText(text1);
-                    String text2 = String.valueOf(newGrammes * food.getLipid()) + " ";
+                    float lip = (((float) newGrammes / 100) * food.getLipid());
+                    String text2 = df.format(lip) + "";
                     lipLbl.setText(text2);
-                    String text3 = String.valueOf(newGrammes * food.getCalorie()) + " ";
+                    float calo = (((float) newGrammes / 100) * food.getCalorie());
+                    String text3 = df.format(calo) + "";
                     kcalLabel.setText(text3);
                 } else {
                     String text = "0";
@@ -156,7 +164,11 @@ public class SearchFoodActivitty extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 Snackbar.make(findViewById(R.id.container), "Voici les informations disponibles pour : " + query, Snackbar.LENGTH_SHORT).show();
-                installFood(query);
+                food = getFood(query);
+                if (food==null){
+                    return false;
+                }
+                installFood(food);
                 return false;
             }
 
@@ -174,11 +186,21 @@ public class SearchFoodActivitty extends AppCompatActivity {
         searchView.setSubmitOnClick(true);
     }
 
+    private Food getFood(String name) {
+        for (int i = 0; i < this.foodList.size(); i++) {
+            if (this.foodList.get(i).getName().equals(name)){
+                return this.foodList.get(i);
+            }
+        }
+        return null;
+    }
+
 
     //Initialise les textviews en fonction du food
-    private void installFood(String food) {
 
-        this.food = FoodSuggestor.getFoodByName(food);
+    private void installFood(Food food) {
+
+        this.food = food;
 
         if (this.food != null) {
             mainLabel.setText(this.food.getName());
@@ -219,12 +241,15 @@ public class SearchFoodActivitty extends AppCompatActivity {
             } else {
                 f = new FoodList();
                 UserSingleton.getUser().getCalendarFoodList().put(currentDay, f);
+
             }
             try {
                 this.food.setLatitude(getLatitude());
                 this.food.setLongitude(getLongitude());
 
                 f.addFood(this.food, Long.parseLong(qtTxtView.getText().toString()));
+                UserSingleton.getUser().eat(this.food);
+
             } catch (NumberFormatException e) {
                 return;
             }
@@ -343,7 +368,7 @@ public class SearchFoodActivitty extends AppCompatActivity {
         a[1] = a[1].replaceAll("kcal", "");
         a[1] = a[1].replaceAll("g", "");
         String[] b = a[1].split("\\|");
-        return new Food(name, Float.valueOf(b[3].trim()).longValue(), Float.valueOf(b[2].trim()).longValue(), Float.valueOf(b[1].trim()).longValue());
+        return new Food(name, Float.valueOf(b[3].trim()).longValue(), Float.valueOf(b[1].trim()).longValue(), Float.valueOf(b[2].trim()).longValue());
 
 
     }

@@ -47,6 +47,23 @@ public class NutrientConsumptionFragment extends Fragment {
         carbs = rootView.findViewById(R.id.carbsTxt);
         lipids = rootView.findViewById(R.id.lipidesTxt);
 
+
+        Calendar calendar = Calendar.getInstance();
+
+        mViewModel = ViewModelProviders.of(getActivity()).get(DateSelectorViewModel.class);
+        if(mViewModel != null){
+            calendar = mViewModel.getDate().getValue();
+
+        }
+
+        if(getUser().getCalendarFoodList().containsKey(calendar.get(Calendar.DAY_OF_MONTH))) {
+            foodList = getUser().getCalendarFoodList().get(calendar.get(Calendar.DAY_OF_MONTH));
+            kcals.setText(String.valueOf(Math.round(foodList.getCalorie())));
+            proteins.setText(String.valueOf(Math.round(foodList.getProteins())));
+            carbs.setText(String.valueOf(Math.round(foodList.getCarbs())));
+            lipids.setText(String.valueOf(Math.round(foodList.getLipid())));
+        }
+
         return rootView;
     }
 
@@ -60,14 +77,24 @@ public class NutrientConsumptionFragment extends Fragment {
             @Override
             public void onChanged(@Nullable Calendar calendar) {
 
-                // if there is a food list update the data
-                if(getUser().getCalendarFoodList().containsKey(calendar)){
-                    foodList = getUser().getCalendarFoodList().get(calendar);
-                    kcals.setText(new StringBuilder(Math.round(foodList.getCalorie())));
-                    proteins.setText(new StringBuilder(Math.round(foodList.getProteins())));
-                    carbs.setText(new StringBuilder(Math.round(foodList.getCarbs())));
-                    lipids.setText(new StringBuilder(Math.round(foodList.getLipid())));
+                Log.d("GET",calendar.get(Calendar.DAY_OF_MONTH)+"");
 
+
+                // if there is a food list update the data
+                if(getUser().getCalendarFoodList().containsKey(calendar.get(Calendar.DAY_OF_MONTH))){
+                    foodList = getUser().getCalendarFoodList().get(calendar.get(Calendar.DAY_OF_MONTH));
+
+                    kcals.setText(String.valueOf(Math.round(foodList.getCalorie())));
+                    proteins.setText(String.valueOf(Math.round(foodList.getProteins())));
+                    carbs.setText(String.valueOf(Math.round(foodList.getCarbs())));
+                    lipids.setText(String.valueOf(Math.round(foodList.getLipid())));
+
+                }
+                else{
+                    kcals.setText("0");
+                    proteins.setText("0");
+                    carbs.setText("0");
+                    lipids.setText("0");
                 }
             }
         });

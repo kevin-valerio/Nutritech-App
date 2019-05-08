@@ -54,4 +54,10 @@
         <item name="android:hint">@string/search_hint</item>
     </style>
 
+    <style name="MyProgressBarTwo" parent="@style/Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/progressbardraw</item>
+        <item name="android:minWidth">200dp</item>
+    </style>
+
+
 </resources>
