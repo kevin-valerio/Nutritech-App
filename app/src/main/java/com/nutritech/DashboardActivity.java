@@ -95,15 +95,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
     }
 
     private void initChartWithWeight() {
-        graphView = findViewById(R.id.dashboardGraph);
-        graphView.setTitle("Evolution de votre poids");
-        Series series = new LineGraphSeries<>();
-        ((LineGraphSeries) series).appendData(new DataPoint(1, 0), false, 999);
-        ((LineGraphSeries) series).setTitle("Poids (en kg)");
-        UserSingleton.getUser().getWeights().forEach(weight -> ((LineGraphSeries) series).appendData(new DataPoint(series.getHighestValueX() + 1, weight), false, 999));
-        ((LineGraphSeries) series).setColor(Color.parseColor("#e5def4"));
-        ((LineGraphSeries) series).setThickness(10);
-        graphView.addSeries(series);
+
     }
 
     private void initProgressBar() {
