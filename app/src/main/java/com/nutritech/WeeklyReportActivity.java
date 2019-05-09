@@ -20,24 +20,12 @@ public class WeeklyReportActivity extends AppCompatActivity{
         setContentView(R.layout.activity_weeklyreport);
 
 
-        initGraph();
         initToolBar();
         initFloatingButton();
 
     }
 
-    //Initialise le graph
-    private void initGraph(){
-        GraphView graph = (GraphView) findViewById(R.id.weeklyGraph);
 
-        series = new LineGraphSeries<DataPoint>(new DataPoint[]{
-                new DataPoint(0,1),
-                new DataPoint(2,5),
-                new DataPoint(3,3)
-        });
-
-        graph.addSeries(series);
-    }
 
 
     //Initialise la toolbar
