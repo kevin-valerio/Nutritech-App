@@ -14,9 +14,8 @@ public class User {
     private int objProteines;
     private int objGlucides;
     private int objLipides;
-    private ArrayList<Integer> weights = new ArrayList<>();
+    private ArrayList<DateTuple> weights = new ArrayList<>();
     private int height;
-    private double kcal;
     private int age;
     private ArrayList<Food> eatenFood = new ArrayList<>();
     private String gender;
@@ -117,11 +116,11 @@ public class User {
         this.goal = goal;
     }
 
-    public ArrayList<Integer> getWeights() {
+    public ArrayList<DateTuple> getWeights() {
         return weights;
     }
 
-    public void setWeights(ArrayList<Integer> weights) {
+    public void setWeights(ArrayList<DateTuple> weights) {
         this.weights = weights;
     }
 

@@ -1,11 +1,13 @@
 package com.nutritech;
 
 import android.app.AlarmManager;
+import android.app.Fragment;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.content.ContextCompat;
@@ -33,6 +35,7 @@ import com.nutritech.models.UserSingleton;
 import com.nutritech.models.WeightAlertBuilder;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 
 public class DashboardActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
