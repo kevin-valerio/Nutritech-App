@@ -96,7 +96,7 @@ public class FoodRecyclerAdapter extends RecyclerView.Adapter<FoodRecyclerAdapte
         // - replace the contents of the view with that element
         Food food = dataSet.get(position);
         holder.textView.setText(food.getName());
-        holder.textCal.setText(String.valueOf(round(food.getCalorie())));
+        holder.textCal.setText(String.valueOf(round(food.getCalorie()*(food.getQuantite()/100))));
         holder.imageView.setImageResource(tab_images_pour_la_liste[position]);
         holder.textView.setText(dataSet.get(position).getName());
 
