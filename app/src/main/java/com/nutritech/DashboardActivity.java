@@ -24,11 +24,6 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.series.DataPoint;
-import com.jjoe64.graphview.series.LineGraphSeries;
-import com.jjoe64.graphview.series.Series;
-import com.nutritech.Receiver.AlarmReceiver;
 import com.nutritech.models.FoodList;
 import com.nutritech.Services.StarterService;
 import com.nutritech.models.UserSingleton;
@@ -56,7 +51,8 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
     private TextView proteine;
     private TextView lipide;
     private ProgressBar progressBar;
-    private GraphView graphView;
+    private MonthlyGraphFragment fragment = new MonthlyGraphFragment();
+
 
 
     @Override
