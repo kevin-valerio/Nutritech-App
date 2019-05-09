@@ -40,7 +40,7 @@ public class CoachReview {
                     ", d'ingérer de plus petites sources de glucides et donc de privilégier les légumes et les fruits qui sont fondamentaux.           \n";
         }
 
-        if (user.getCalendarFoodList().get(today).getCalorie() > percentageOf(80, user.getKcal())) {
+        if (user.getCalendarFoodList().get(today).getCalorie() > percentageOf(80, user.getKcalObj())) {
             review += "Vous avez consommé plus de 80% de calories prévues. Vous devriez ingérer moins de calories dans le cadre d'une perte de masse.           \n";
         }
 
@@ -64,7 +64,7 @@ public class CoachReview {
             review = "Vous n'êtes pas en équilibre sur vos apports glucidiques ... Peut-être devriez-vous consulter l'application plus régulierement ?     \n";
         }
 
-        if (user.getCalendarFoodList().get(today).getCalorie() != percentageOf(100, user.getKcal())) {
+        if (user.getCalendarFoodList().get(today).getCalorie() != percentageOf(100, user.getKcalObj())) {
             review = "Vous n'êtes pas en équilibre sur vos apports caloriques ... Peut-être devriez-vous consulter l'application plus régulierement ?          \n";
         }
 
@@ -93,7 +93,7 @@ public class CoachReview {
                     "à vos repas ! \n";
         }
 
-        if (user.getCalendarFoodList().get(today).getCalorie() < percentageOf(80, user.getKcal())) {
+        if (user.getCalendarFoodList().get(today).getCalorie() < percentageOf(80, user.getKcalObj())) {
             review += "Vous avez consommé moins de 80% de calories prévues. Vous devriez ingérer plus          \n";
         }
 

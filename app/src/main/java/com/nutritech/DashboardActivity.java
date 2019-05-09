@@ -79,7 +79,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
 
         Calendar calendar = Calendar.getInstance();
         FoodList currentfoodList = UserSingleton.getUser().getCalendarFoodList().get(calendar.get(Calendar.DAY_OF_MONTH));
-        kcal = currentfoodList.getCalorie() + " / " + UserSingleton.getUser().getKcal() + " kcal";
+        kcal = currentfoodList.getCalorie() + " / " + UserSingleton.getUser().getKcalObj() + " kcal";
         lip = currentfoodList.getLipid() + " / " + UserSingleton.getUser().getObjLipides() + " g";
         glu = currentfoodList.getCarbs() + " / " + UserSingleton.getUser().getObjGlucides() + " g";
         prot = currentfoodList.getProteins() + " / " + UserSingleton.getUser().getObjProteines() + " g";
@@ -111,7 +111,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         int todaysCalories = Math.toIntExact(UserSingleton.getUser().getCalendarFoodList().get(Calendar.getInstance().get(Calendar.DAY_OF_MONTH)).getCalorie());
 
         this.progressBar = findViewById(R.id.progressBar);
-        int progressValue = (int) ((todaysCalories / UserSingleton.getUser().getKcal()) * 100);
+        int progressValue = (int) ((todaysCalories / UserSingleton.getUser().getKcalObj()) * 100);
         progressBar.setSecondaryProgress(progressValue);
 
         if (progressValue > 50 && progressValue < 75) {
