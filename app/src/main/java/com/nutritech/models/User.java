@@ -204,7 +204,8 @@ public class User {
     }
 
     public double getKcalCurrent() {
-        return kcalCurrent;
+        int todaysCalories = Math.toIntExact(UserSingleton.getUser().getCalendarFoodList().get(Calendar.getInstance().get(Calendar.DAY_OF_MONTH)).getCalorie());
+        return todaysCalories;
     }
 
     public void setKcalCurrent(double kcal) {

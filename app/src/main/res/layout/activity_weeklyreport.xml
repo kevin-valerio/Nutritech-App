@@ -23,7 +23,7 @@
 
             <fragment
                 android:id="@+id/weeklyGraphFragment"
-                android:name="com.nutritech.WeeklyGraphFragment"
+                android:name="com.nutritech.Fragments.WeeklyGraphFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
