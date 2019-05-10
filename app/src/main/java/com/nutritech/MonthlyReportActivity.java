@@ -9,6 +9,10 @@ import android.support.v7.widget.Toolbar;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
+import com.nutritech.models.DateTuple;
+import com.nutritech.models.UserSingleton;
+
+import java.util.Calendar;
 
 
 public class MonthlyReportActivity extends AppCompatActivity{
@@ -21,37 +25,12 @@ public class MonthlyReportActivity extends AppCompatActivity{
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_monthlyreport);
 
-            initGraph1();
-            initGraph2();
+
             initToolBar();
         }
 
-        //Initialise le graph 1
-        private void initGraph1(){
-            GraphView graph1 = findViewById(R.id.monthlyGraph1);
-            series1 = new LineGraphSeries<>(new DataPoint[]{
-                    new DataPoint(0,1),
-                    new DataPoint(2,5),
-                    new DataPoint(3,3)
-            });
-            graph1.addSeries(series1);
-        }
 
 
-    //Initialise le graph 2
-        private void initGraph2(){
-            GraphView graph2 = findViewById(R.id.monthlyGraph2);
-
-            series2 = new LineGraphSeries<>(new DataPoint[]{
-                    new DataPoint(0,1),
-                    new DataPoint(0.5,5),
-                    new DataPoint(1,3.5),
-                    new DataPoint(1.5,2),
-                    new DataPoint(2,4),
-                    new DataPoint(3,1),
-            });
-            graph2.addSeries(series2);
-        }
 
         //Initialise la ToolBar
         private void initToolBar() {

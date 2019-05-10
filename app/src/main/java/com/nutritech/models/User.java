@@ -1,8 +1,14 @@
 package com.nutritech.models;
 
+import android.util.Log;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Calendar;
 
 public class User {
 
@@ -14,14 +20,16 @@ public class User {
     private int objProteines;
     private int objGlucides;
     private int objLipides;
-    private ArrayList<Integer> weights = new ArrayList<>();
+    private ArrayList<DateTuple> weights = new ArrayList<>();
     private int height;
-    private double kcal;
     private int age;
     private ArrayList<Food> eatenFood = new ArrayList<>();
     private String gender;
     private HashMap<Integer, FoodList> calendarFoodList;
-
+    private int dateOfTheDay = 13;
+    private int currentDay;
+    private double kcalObj;
+    private double kcalCurrent = 0;
 
     public User() {
         //TODO : MOCK-UP à A SUPPRIMER
@@ -56,24 +64,24 @@ public class User {
         this.height = height;
         this.mail = mail;
         this.password = password;
-        this.kcal = (weight * 10 + height * 6.25) - (5 * age);
+        this.kcalObj = (weight * 10 + height * 6.25) - (5 * age);
 
         addWeight(weight);
         if (gender.equals("Homme"))
-            this.kcal += 5;
+            this.kcalObj += 5;
         else if (gender.equals("Femme"))
-            this.kcal += 161;
+            this.kcalObj += 161;
         if (goal == Goal.PRISE_DE_MASSE)
-            kcal += 300;
+            kcalObj += 300;
         else if (goal == Goal.PERTE_DE_MASSE)
-            kcal -= 300;
-        objGlucides = (int) (kcal * 0.4) / 4;
-        objProteines = (int) (kcal * 0.3) / 4;
-        objLipides = (int) (kcal * 0.3) / 9;
+            kcalObj -= 300;
+        objGlucides = (int) (kcalObj * 0.4) / 4;
+        objProteines = (int) (kcalObj * 0.3) / 4;
+        objLipides = (int) (kcalObj * 0.3) / 9;
         calendarFoodList = new HashMap<>();
 
         Calendar calendar = Calendar.getInstance();
-        int currentDay = calendar.get(Calendar.DAY_OF_MONTH);
+        currentDay = calendar.get(Calendar.DAY_OF_MONTH);
         calendarFoodList.put(currentDay, new FoodList());
     }
 
@@ -117,11 +125,11 @@ public class User {
         this.goal = goal;
     }
 
-    public ArrayList<Integer> getWeights() {
+    public ArrayList<DateTuple> getWeights() {
         return weights;
     }
 
-    public void setWeights(ArrayList<Integer> weights) {
+    public void setWeights(ArrayList<DateTuple> weights) {
         this.weights = weights;
     }
 
@@ -173,12 +181,12 @@ public class User {
         this.objLipides = objLipides;
     }
 
-    public double getKcal() {
-        return kcal;
+    public double getKcalObj() {
+        return kcalObj;
     }
 
-    public void setKcal(double kcal) {
-        this.kcal = kcal;
+    public void setKcalObj(double kcal) {
+        this.kcalObj = kcal;
     }
 
     public ArrayList<Food> getEatenFood() {
@@ -187,9 +195,21 @@ public class User {
 
     public void eat(Food food) {
         this.eatenFood.add(food);
+        int todaysCalories = Math.toIntExact(UserSingleton.getUser().getCalendarFoodList().get(Calendar.getInstance().get(Calendar.DAY_OF_MONTH)).getCalorie());
+
+        this.setKcalCurrent(todaysCalories);
+
+
+
     }
 
+    public double getKcalCurrent() {
+        return kcalCurrent;
+    }
 
+    public void setKcalCurrent(double kcal) {
+        this.kcalCurrent = kcal;
+    }
 
     /**
      * Add a weight to the user
@@ -197,7 +217,8 @@ public class User {
      * @param weight user's weight
      */
     public void addWeight(int weight) {
-        weights.add(weight);
+        weights.add(new DateTuple(dateOfTheDay,weight));
+        dateOfTheDay++;
     }
 
     public HashMap<Integer, FoodList> getCalendarFoodList() {
@@ -208,4 +229,7 @@ public class User {
         this.calendarFoodList = calendarFoodList;
     }
 
+    public int getDateOfTheDayCalories() {
+        return currentDay;
+    }
 }

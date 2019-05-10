@@ -1,11 +1,13 @@
 package com.nutritech;
 
 import android.app.AlarmManager;
+import android.app.Fragment;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.content.ContextCompat;
@@ -22,17 +24,13 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.series.DataPoint;
-import com.jjoe64.graphview.series.LineGraphSeries;
-import com.jjoe64.graphview.series.Series;
-import com.nutritech.Receiver.AlarmReceiver;
 import com.nutritech.models.FoodList;
 import com.nutritech.Services.StarterService;
 import com.nutritech.models.UserSingleton;
 import com.nutritech.models.WeightAlertBuilder;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 
 public class DashboardActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -55,7 +53,8 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
     private TextView proteine;
     private TextView lipide;
     private ProgressBar progressBar;
-    private GraphView graphView;
+    private MonthlyGraphFragment fragment = new MonthlyGraphFragment();
+
 
 
     @Override
@@ -80,7 +79,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
 
         Calendar calendar = Calendar.getInstance();
         FoodList currentfoodList = UserSingleton.getUser().getCalendarFoodList().get(calendar.get(Calendar.DAY_OF_MONTH));
-        kcal = currentfoodList.getCalorie() + " / " + UserSingleton.getUser().getKcal() + " kcal";
+        kcal = currentfoodList.getCalorie() + " / " + UserSingleton.getUser().getKcalObj() + " kcal";
         lip = currentfoodList.getLipid() + " / " + UserSingleton.getUser().getObjLipides() + " g";
         glu = currentfoodList.getCarbs() + " / " + UserSingleton.getUser().getObjGlucides() + " g";
         prot = currentfoodList.getProteins() + " / " + UserSingleton.getUser().getObjProteines() + " g";
@@ -96,15 +95,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
     }
 
     private void initChartWithWeight() {
-        graphView = findViewById(R.id.dashboardGraph);
-        graphView.setTitle("Evolution de votre poids");
-        Series series = new LineGraphSeries<>();
-        ((LineGraphSeries) series).appendData(new DataPoint(1, 0), false, 999);
-        ((LineGraphSeries) series).setTitle("Poids (en kg)");
-        UserSingleton.getUser().getWeights().forEach(weight -> ((LineGraphSeries) series).appendData(new DataPoint(series.getHighestValueX() + 1, weight), false, 999));
-        ((LineGraphSeries) series).setColor(Color.parseColor("#e5def4"));
-        ((LineGraphSeries) series).setThickness(10);
-        graphView.addSeries(series);
+
     }
 
     private void initProgressBar() {
@@ -112,7 +103,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         int todaysCalories = Math.toIntExact(UserSingleton.getUser().getCalendarFoodList().get(Calendar.getInstance().get(Calendar.DAY_OF_MONTH)).getCalorie());
 
         this.progressBar = findViewById(R.id.progressBar);
-        int progressValue = (int) ((todaysCalories / UserSingleton.getUser().getKcal()) * 100);
+        int progressValue = (int) ((todaysCalories / UserSingleton.getUser().getKcalObj()) * 100);
         progressBar.setSecondaryProgress(progressValue);
 
         if (progressValue > 50 && progressValue < 75) {

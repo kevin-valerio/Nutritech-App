@@ -17,10 +17,18 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary" />
 
-        <com.jjoe64.graphview.GraphView
-            android:id="@+id/weeklyGraph"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="250dp" />
+            android:layout_height="220dp">
+
+            <fragment
+                android:id="@+id/weeklyGraphFragment"
+                android:name="com.nutritech.WeeklyGraphFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+        </LinearLayout>
+
 
         <TextView
             android:layout_width="304dp"

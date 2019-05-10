@@ -20,20 +20,38 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary" />
 
-        <com.jjoe64.graphview.GraphView
-            android:id="@+id/monthlyGraph1"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="220dp" />
+            android:layout_height="220dp">
+
+            <fragment
+                android:id="@+id/weeklyGraphFragment"
+                android:name="com.nutritech.WeeklyGraphFragment"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:layout_weight="1" />
+
+        </LinearLayout>
 
         <View
             android:id="@+id/view4"
             android:layout_width="match_parent"
             android:layout_height="18dp" />
 
-        <com.jjoe64.graphview.GraphView
-            android:id="@+id/monthlyGraph2"
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="220dp" />
+            android:layout_height="220dp">
+
+            <fragment
+                android:id="@+id/monthlyGraphFragment"
+                android:name="com.nutritech.MonthlyGraphFragment"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
 
         <View
             android:id="@+id/view6"
