@@ -26,7 +26,7 @@
 
             <fragment
                 android:id="@+id/weeklyGraphFragment"
-                android:name="com.nutritech.WeeklyGraphFragment"
+                android:name="com.nutritech.Fragments.WeeklyGraphFragment"
                 android:layout_width="match_parent"
                 android:layout_height="220dp"
                 android:layout_weight="1" />
@@ -45,7 +45,7 @@
 
             <fragment
                 android:id="@+id/monthlyGraphFragment"
-                android:name="com.nutritech.MonthlyGraphFragment"
+                android:name="com.nutritech.Fragments.MonthlyGraphFragment"
                 android:layout_width="match_parent"
                 android:layout_height="220dp"
                 android:layout_weight="1" />

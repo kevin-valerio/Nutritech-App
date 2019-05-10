@@ -9,7 +9,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="46dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/retour"
@@ -17,10 +19,17 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary" />
 
-        <com.jjoe64.graphview.GraphView
-            android:id="@+id/weeklyGraph"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="157dp" />
+            android:layout_height="157dp">
+
+            <fragment
+                android:id="@+id/weeklyGraphFragment"
+                android:name="com.nutritech.Fragments.WeeklyGraphFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,9 +37,10 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="615dp"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_width="384dp"
+                android:layout_height="110dp"
+                android:orientation="vertical"
+                app:layout_marginBottom="20dp">
 
                 <TextView
                     android:layout_width="350dp"
@@ -44,7 +54,7 @@
 
                 <TextView
                     android:layout_width="350dp"
-                    android:layout_height="70dp"
+                    android:layout_height="96dp"
                     android:layout_marginLeft="30dp"
 
                     android:background="@color/white" />
@@ -52,8 +62,8 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="192dp"
+                android:layout_height="117dp"
                 android:orientation="vertical">
 
                 <View
@@ -64,7 +74,7 @@
 
                 <android.support.design.widget.FloatingActionButton
                     android:id="@+id/sharingButton"
-                    android:layout_width="wrap_content"
+                    android:layout_width="59dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:clickable="true"

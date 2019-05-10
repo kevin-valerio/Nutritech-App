@@ -1,7 +1,5 @@
-package com.nutritech;
+package com.nutritech.Fragments;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -13,10 +11,8 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.LegendRenderer;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
-import com.nutritech.models.DateTuple;
+import com.nutritech.R;
 import com.nutritech.models.UserSingleton;
-
-import java.io.Console;
 
 
 /**
