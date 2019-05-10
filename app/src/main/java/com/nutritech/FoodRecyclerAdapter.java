@@ -14,6 +14,8 @@ import com.nutritech.Helpers.ItemClickListener;
 import com.nutritech.models.Food;
 import com.nutritech.models.FoodList;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,6 +49,7 @@ public class FoodRecyclerAdapter extends RecyclerView.Adapter<FoodRecyclerAdapte
         // each data item is just a string in this case
         public TextView textView;
         public TextView textCal;
+        public TextView textEmpty;
         public ImageView imageView;
         public RelativeLayout viewForeground,viewBackground;
         public ItemClickListener itemClickListener;
@@ -58,6 +61,7 @@ public class FoodRecyclerAdapter extends RecyclerView.Adapter<FoodRecyclerAdapte
             textView = (TextView) v.findViewById(R.id.label);
             textCal = (TextView) v.findViewById(R.id.cal);
             imageView = (ImageView) v.findViewById(R.id.icon);
+            textEmpty = (TextView) v.findViewById(R.id.emptyList);
             viewForeground =  v.findViewById(R.id.view_foreground);
             viewBackground =  v.findViewById(R.id.view_background);
 

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
 android:layout_height="wrap_content" >
 
     <RelativeLayout
@@ -11,13 +13,15 @@ android:layout_height="wrap_content" >
 
         <ImageView
             android:id="@+id/delete_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:src="@drawable/baseline_place_black_18dp"
             android:scaleType="centerCrop"
-            android:layout_width="30dp"
-            android:layout_height="30dp" />
+            android:src="@drawable/trash"
+            app:srcCompat="@drawable/trash"
+            tools:srcCompat="@drawable/trash" />
 
         <TextView
             android:text="Supprimer"
@@ -25,6 +29,7 @@ android:layout_height="wrap_content" >
             android:layout_toLeftOf="@id/delete_icon"
             android:layout_marginRight="10dp"
             android:textSize="13sp"
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
         </TextView>

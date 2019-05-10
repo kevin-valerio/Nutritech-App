@@ -24,6 +24,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.nutritech.Receiver.AlarmReceiver;
 import com.nutritech.models.FoodList;
 import com.nutritech.Services.StarterService;
 import com.nutritech.models.UserSingleton;
