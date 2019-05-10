@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import com.nutritech.DashboardActivity;
 import com.nutritech.R;
 import com.nutritech.WeeklyReportActivity;
 
@@ -21,18 +22,19 @@ import com.nutritech.WeeklyReportActivity;
 public class AlarmReceiver extends BroadcastReceiver {
 
     private static final String DEBUG_TAG = "AlarmReceiver";
-    private static final String SERVICE_BROADCAST_KEY = "starterService";
-    final static int RQS_STOP_SERVICE = 1;
-    final static int RQS_SEND_SERVICE = 2;
+    private static final String SERVICE_BROADCAST_KEY = "startNotification";
+    final static int RQS_STOP_NOTIFICATION = 1;
+    final static int RQS_START_NOTIFICATION = 2;
 
     @Override
     public void onReceive(Context context, Intent intent) {
         // start the notification
         NotificationManager notificationManager = null;
         int rqs = intent.getIntExtra(SERVICE_BROADCAST_KEY,0);
-        if(rqs == RQS_STOP_SERVICE){
+
+        if(rqs == RQS_STOP_NOTIFICATION){
         }
-        if (rqs == RQS_SEND_SERVICE){
+        if (rqs == RQS_START_NOTIFICATION){
             sendNotification("Aliments consommés aujourd'hui","Pensez à renseignez les aliments que vous avez consommé",context);
         }
 
@@ -54,7 +56,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         }
 
         // Create an Intent for the activity you want to start
-        Intent resultIntent = new Intent(context, WeeklyReportActivity.class);
+        Intent resultIntent = new Intent(context, DashboardActivity.class);
         // Create the TaskStackBuilder and add the intent, which inflates the back stack
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
         stackBuilder.addNextIntentWithParentStack(resultIntent);
@@ -67,17 +69,11 @@ public class AlarmReceiver extends BroadcastReceiver {
                 .setContentText(message)
                 .setAutoCancel(true)
                 .setOnlyAlertOnce(true)
-                .setSmallIcon(R.mipmap.ic_launcher);
+                .setSmallIcon(R.mipmap.nutritech_logo);
 
         notification.setContentIntent(resultPendingIntent);
 
         notificationManager.notify(1, notification.build());
-
-        Log.d("d", "NOTIIIF");
-
-
-
-
     }
 
 

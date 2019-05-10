@@ -40,8 +40,10 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
     private StarterService mBoundService;
     private static final String TAG = "NotifyActivity";
     final static String SERVICE_RECEIVER = "alarmReceiver";
-    final static String SERVICE_BROADCAST_KEY = "starterService";
+    final static String SERVICE_BROADCAST_KEY = "startNotification";
+    final static int RQS_START_NOTIFICATION = 2;
     final static int RQS_SEND_SERVICE = 2;
+
 
     private PendingIntent pendingIntent;
     private String kcal;
@@ -71,7 +73,9 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
        // Intent alarmIntent = new Intent(this.getApplicationContext(), AlarmReceiver.class);
        // pendingIntent = PendingIntent.getBroadcast(this.getApplicationContext(), 0, alarmIntent, 0);
 
-        startService(new Intent(this, StarterService.class));
+        //startService(new Intent(this, StarterService.class));
+
+        startNotificationAlarm();
 
 
         Calendar calendar = Calendar.getInstance();
@@ -288,6 +292,30 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
             return true;
         });
         return true;
+    }
+
+    /**
+     * Start the alarm manager to send notif daily
+     */
+    public void startNotificationAlarm() {
+        AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+        /* Set the alarm to start at 15:00 */
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, 7);
+        calendar.set(Calendar.MINUTE, 6);
+
+        // If the hour is past, add one day
+        if(calendar.before(Calendar.getInstance())){
+            calendar.add(Calendar.DATE,1);
+        }
+
+        /* Retrieve a PendingIntent that will perform a broadcast */
+        Intent alarmIntent = new Intent(this.getApplicationContext(), AlarmReceiver.class);
+        alarmIntent.putExtra(SERVICE_BROADCAST_KEY,RQS_START_NOTIFICATION);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this.getApplicationContext(), 0, alarmIntent, 0);
+        manager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY , pendingIntent);
     }
 
 }
