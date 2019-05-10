@@ -5,10 +5,15 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.method.ScrollingMovementMethod;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
+import com.nutritech.models.CoachReview;
+import com.nutritech.models.UserSingleton;
 
 public class WeeklyReportActivity extends AppCompatActivity{
 
@@ -22,6 +27,7 @@ public class WeeklyReportActivity extends AppCompatActivity{
 
         initToolBar();
         initFloatingButton();
+        initTextView();
 
     }
 
@@ -47,7 +53,17 @@ public class WeeklyReportActivity extends AppCompatActivity{
         try {
             startActivity(FBIntent);
         } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(this,
+                    "Impossible d'ouvrir Messenger. Veuillez réessayer plus tard.",
+                    Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void initTextView(){
+        CoachReview coachReview = new CoachReview(UserSingleton.getUser());
+        TextView coachReviewTextView = (TextView) findViewById(R.id.coachReview);
+        coachReviewTextView.setMovementMethod(new ScrollingMovementMethod());
+        coachReviewTextView.setText(coachReview.getReview());
     }
 
     private void initFloatingButton() {

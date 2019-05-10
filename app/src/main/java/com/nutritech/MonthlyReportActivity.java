@@ -6,10 +6,13 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.method.ScrollingMovementMethod;
+import android.widget.TextView;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
+import com.nutritech.models.CoachReview;
 import com.nutritech.models.DateTuple;
 import com.nutritech.models.UserSingleton;
 
@@ -28,14 +31,30 @@ public class MonthlyReportActivity extends AppCompatActivity{
 
             initFloatingButton();
             initToolBar();
+            initTextView();
         }
 
 
     private void shareReport() {
         Intent FBIntent = new Intent(Intent.ACTION_SEND);
+        int currentday = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
         FBIntent.setType("text/plain");
         FBIntent.setPackage("com.facebook.orca");
-        FBIntent.putExtra(Intent.EXTRA_TEXT, "Aujourd'hui j'ai mangé 2560 kcal ! J'ai atteint mon objectif de 2500 kcal.");
+        String messagekcal = "";
+        messagekcal = String.valueOf(UserSingleton.getUser().getCalendarFoodList().get(currentday).getCalorie());
+        String messageObj = "";
+        messageObj = String.valueOf(UserSingleton.getUser().getKcalObj());
+        String messageNutrients = "";
+        messageNutrients = "Macronutriments :\n" + "Glucides  "
+                + UserSingleton.getUser().getCalendarFoodList().get(currentday).getCarbs()
+                + "/" + UserSingleton.getUser().getObjGlucides() + "\nLipides  "
+                + UserSingleton.getUser().getCalendarFoodList().get(currentday).getLipid()
+                + "/" + UserSingleton.getUser().getObjLipides() + "\nProtéïnes  "
+                + UserSingleton.getUser().getCalendarFoodList().get(currentday).getProteins()
+                + "/" + UserSingleton.getUser().getObjProteines();
+        FBIntent.putExtra(Intent.EXTRA_TEXT, "Aujourd'hui j'ai mangé " + messagekcal + " kcal !\n" +
+                "Mon objectif est de " + messageObj + " kcal.\n" + messageNutrients
+                );
         try {
             startActivity(FBIntent);
         } catch (android.content.ActivityNotFoundException ex) {
@@ -58,5 +77,12 @@ public class MonthlyReportActivity extends AppCompatActivity{
         shareReport.setOnClickListener(click -> {
             shareReport();
         });
+    }
+
+    private void initTextView(){
+        CoachReview coachReview = new CoachReview(UserSingleton.getUser());
+        TextView coachReviewTextView = (TextView) findViewById(R.id.coachReview);
+        coachReviewTextView.setMovementMethod(new ScrollingMovementMethod());
+        coachReviewTextView.setText(coachReview.getReview());
     }
 }
