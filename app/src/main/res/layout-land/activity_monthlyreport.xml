@@ -18,32 +18,25 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="170dp"
-            android:orientation="vertical">
+            android:layout_height="161dp"
+            android:orientation="horizontal">
 
-            <LinearLayout
-                android:id="@+id/linearLayout2"
+            <fragment
+                android:id="@+id/weeklyGraphFragment"
+                android:name="com.nutritech.Fragments.WeeklyGraphFragment"
+                android:layout_width="365dp"
+                android:layout_height="match_parent" />
+
+            <fragment
+                android:id="@+id/monthlyGraphFragment"
+                android:name="com.nutritech.Fragments.MonthlyGraphFragment"
                 android:layout_width="match_parent"
-                android:layout_height="113dp"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <fragment
-                    android:id="@+id/weeklyGraphFragment"
-                    android:name="com.nutritech.Fragments.WeeklyGraphFragment"
-                    android:layout_width="362dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="10dp" />
-
-                <fragment
-                    android:id="@+id/monthlyGraphFragment"
-                    android:name="com.nutritech.Fragments.MonthlyGraphFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="10dp" />
-
-            </LinearLayout>
+                android:layout_height="match_parent" />
         </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -54,7 +47,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="2dp"
                 android:layout_marginRight="15dp"
                 android:background="@color/primary_dark"
                 android:fontFamily="sans-serif-light"
@@ -65,7 +58,7 @@
             <TextView
                 android:id="@+id/coachReview"
                 android:layout_width="match_parent"
-                android:layout_height="96dp"
+                android:layout_height="65dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginBottom="15dp"

@@ -20,26 +20,26 @@
 
         <fragment
             android:id='@id/monthlyGraphFragment'
-            android:name="com.nutritech.Fragments.WeeklyGraphFragment"
+            android:name="com.nutritech.Fragments.MonthlyGraphFragment"
             android:layout_width="match_parent"
-            android:layout_height="220dp"
-            android:layout_marginTop="20dp"
+            android:layout_height="216dp"
             android:layout_weight="1" />
 
         <fragment
             android:id="@+id/weeklyGraphFragment"
             android:name="com.nutritech.Fragments.WeeklyGraphFragment"
             android:layout_width="match_parent"
-            android:layout_height="220dp"
-            android:layout_marginTop="8dp"
+            android:layout_height="229dp"
             android:layout_weight="1" />
 
         <TextView
             android:id="@+id/textView7"
             android:layout_width="323dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
             android:background="@color/primary_dark"
             android:fontFamily="sans-serif-light"
             android:text="Revue du coach:"
@@ -50,7 +50,8 @@
             android:id="@+id/coachReview"
             android:layout_width="323dp"
             android:layout_height="88dp"
-            android:layout_marginLeft="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginBottom="52dp"
             android:background="@color/primary_dark"
             android:fontFamily="sans-serif-light"
