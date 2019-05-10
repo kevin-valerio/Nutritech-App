@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.nutritech.FoodRecyclerAdapter;
 import com.nutritech.Helpers.RecyclerItemTouchHelper;
@@ -26,7 +27,9 @@ import com.nutritech.models.FoodList;
 import com.nutritech.models.UserSingleton;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.List;
 
 import static com.nutritech.models.UserSingleton.getUser;
@@ -58,6 +61,15 @@ public class FoodConsumptionFragment extends Fragment implements RecyclerItemTou
         foodList.getDailyFood().add(new Food("Poire", 41, 18, 22));
 
         this.data = foodList.getDailyFood();
+
+        Button sortBtn = rootView.findViewById(R.id.sortBtn);
+        sortBtn.setOnClickListener(v -> {
+           foodList.getDailyFood().sort((o1, o2) -> Math.toIntExact(o1.getCalorie() - o2.getCalorie()));
+            // clear old list
+            data.clear();
+           data.addAll(foodList.getDailyFood());
+           mAdapter.notifyDataSetChanged();
+        });
 
 
         // use this setting to improve performance if you know that changes
