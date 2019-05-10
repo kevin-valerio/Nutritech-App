@@ -6,7 +6,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -15,40 +14,79 @@
             android:id="@+id/retour"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            tools:layout_editor_absoluteY="50dp" />
-    </LinearLayout>
+            android:background="?attr/colorPrimary" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="170dp"
-        android:layout_weight="1"
-        android:orientation="horizontal"
-        tools:layout_editor_absoluteY="24dp">
-
-        <fragment
-            android:id="@+id/weeklyGraphFragment"
-            android:name="com.nutritech.Fragments.WeeklyGraphFragment"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="220dp" />
+            android:layout_height="170dp"
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="113dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
 
-    <LinearLayout
-        android:id="@+id/linearLayout4"
-        android:layout_width="match_parent"
-        android:layout_height="170dp"
-        android:layout_weight="1"
-        tools:layout_editor_absoluteY="227dp">
+                <fragment
+                    android:id="@+id/weeklyGraphFragment"
+                    android:name="com.nutritech.Fragments.WeeklyGraphFragment"
+                    android:layout_width="362dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp" />
 
-        <fragment
-            android:id="@+id/monthlyGraphFragment"
-            android:name="com.nutritech.Fragments.MonthlyGraphFragment"
+                <fragment
+                    android:id="@+id/monthlyGraphFragment"
+                    android:name="com.nutritech.Fragments.MonthlyGraphFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="220dp" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:background="@color/primary_dark"
+                android:fontFamily="sans-serif-light"
+                android:text="Revue du coach :"
+                android:textColor="@color/white"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/coachReview"
+                android:layout_width="match_parent"
+                android:layout_height="96dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="15dp"
+                android:background="@color/primary_dark"
+                android:fontFamily="sans-serif-light"
+                android:scrollbars="vertical"
+                android:textColor="@color/white"
+                android:textSize="15dp" />
+        </LinearLayout>
 
     </LinearLayout>
 
-
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/sharingButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_share" />
 </android.support.constraint.ConstraintLayout>

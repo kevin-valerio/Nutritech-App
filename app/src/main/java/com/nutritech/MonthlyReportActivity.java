@@ -64,7 +64,7 @@ public class MonthlyReportActivity extends AppCompatActivity{
         //Initialise la ToolBar
         private void initToolBar() {
             Toolbar mToolbar = findViewById(R.id.retour);
-            mToolbar.setTitle("Bilan Mensuel");
+            mToolbar.setTitle("Bilan mensuel");
             mToolbar.setNavigationIcon(R.drawable.ic_add_alert_black_24dp);
             mToolbar.setNavigationOnClickListener(view -> {
                 startActivity(new Intent(this, DashboardActivity.class));

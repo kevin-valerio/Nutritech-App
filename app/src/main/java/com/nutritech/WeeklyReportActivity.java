@@ -15,6 +15,8 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 import com.nutritech.models.CoachReview;
 import com.nutritech.models.UserSingleton;
 
+import java.util.Calendar;
+
 public class WeeklyReportActivity extends AppCompatActivity{
 
     LineGraphSeries series;
@@ -37,7 +39,7 @@ public class WeeklyReportActivity extends AppCompatActivity{
     //Initialise la toolbar
     private void initToolBar() {
         Toolbar mToolbar = findViewById(R.id.retour);
-        mToolbar.setTitle("Bilan Hedbomadaire");
+        mToolbar.setTitle("Bilan hedbomadaire");
         mToolbar.setNavigationIcon(R.drawable.ic_add_alert_black_24dp);
         mToolbar.setNavigationOnClickListener(view -> {
             startActivity(new Intent(this, DashboardActivity.class));
@@ -47,21 +49,33 @@ public class WeeklyReportActivity extends AppCompatActivity{
 
     private void shareReport() {
         Intent FBIntent = new Intent(Intent.ACTION_SEND);
+        int currentday = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
         FBIntent.setType("text/plain");
         FBIntent.setPackage("com.facebook.orca");
-        FBIntent.putExtra(Intent.EXTRA_TEXT, "Aujourd'hui j'ai mangé 2560 kcal ! J'ai atteint mon objectif de 2500 kcal.");
+        String messagekcal = "";
+        messagekcal = String.valueOf(UserSingleton.getUser().getCalendarFoodList().get(currentday).getCalorie());
+        String messageObj = "";
+        messageObj = String.valueOf(UserSingleton.getUser().getKcalObj());
+        String messageNutrients = "";
+        messageNutrients = "Macronutriments :\n" + "Glucides  "
+                + UserSingleton.getUser().getCalendarFoodList().get(currentday).getCarbs()
+                + "/" + UserSingleton.getUser().getObjGlucides() + "\nLipides  "
+                + UserSingleton.getUser().getCalendarFoodList().get(currentday).getLipid()
+                + "/" + UserSingleton.getUser().getObjLipides() + "\nProtéïnes  "
+                + UserSingleton.getUser().getCalendarFoodList().get(currentday).getProteins()
+                + "/" + UserSingleton.getUser().getObjProteines();
+        FBIntent.putExtra(Intent.EXTRA_TEXT, "Aujourd'hui j'ai mangé " + messagekcal + " kcal !\n" +
+                "Mon objectif est de " + messageObj + " kcal.\n" + messageNutrients
+        );
         try {
             startActivity(FBIntent);
         } catch (android.content.ActivityNotFoundException ex) {
-            Toast.makeText(this,
-                    "Impossible d'ouvrir Messenger. Veuillez réessayer plus tard.",
-                    Toast.LENGTH_SHORT).show();
         }
     }
 
     private void initTextView(){
         CoachReview coachReview = new CoachReview(UserSingleton.getUser());
-        TextView coachReviewTextView = (TextView) findViewById(R.id.coachReview);
+        TextView coachReviewTextView = findViewById(R.id.coachReview);
         coachReviewTextView.setMovementMethod(new ScrollingMovementMethod());
         coachReviewTextView.setText(coachReview.getReview());
     }
