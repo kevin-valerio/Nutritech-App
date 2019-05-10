@@ -39,8 +39,7 @@
             <LinearLayout
                 android:layout_width="384dp"
                 android:layout_height="110dp"
-                android:orientation="vertical"
-                app:layout_marginBottom="20dp">
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="350dp"
