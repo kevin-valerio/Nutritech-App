@@ -1,11 +1,9 @@
 package com.nutritech;
 
 import android.app.AlarmManager;
-import android.app.Fragment;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.support.design.widget.FloatingActionButton;
@@ -17,16 +15,16 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.nutritech.Fragments.MonthlyGraphFragment;
 import com.nutritech.Receiver.AlarmReceiver;
+import com.nutritech.Services.CalendarService;
 import com.nutritech.models.FoodList;
-import com.nutritech.Services.StarterService;
 import com.nutritech.models.UserSingleton;
 import com.nutritech.models.WeightAlertBuilder;
 
@@ -36,7 +34,6 @@ import java.util.GregorianCalendar;
 
 public class DashboardActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private StarterService mBoundService;
     private static final String TAG = "NotifyActivity";
     final static String SERVICE_RECEIVER = "alarmReceiver";
     final static String SERVICE_BROADCAST_KEY = "startNotification";
@@ -69,11 +66,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         initProgressBar();
         initChartWithWeight();
 
-        /* Retrieve a PendingIntent that will perform a broadcast */
-       // Intent alarmIntent = new Intent(this.getApplicationContext(), AlarmReceiver.class);
-       // pendingIntent = PendingIntent.getBroadcast(this.getApplicationContext(), 0, alarmIntent, 0);
 
-        //startService(new Intent(this, StarterService.class));
 
         startNotificationAlarm();
 
@@ -92,6 +85,8 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         proteine.setText(prot);
         calorie.setText(kcal);
         lipide.setText(lip);
+
+        startService(new Intent(this, CalendarService.class));
 
     }
 

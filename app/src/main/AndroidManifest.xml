@@ -28,10 +28,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <service
-            android:name=".Services.StarterService"
-            android:enabled="true"
-            android:exported="true" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -74,7 +70,7 @@
             android:theme="@style/AppTheme" />
 
         <receiver android:name=".Receiver.AlarmReceiver"></receiver>
-        <receiver android:name=".Receiver.AlarmReceiver">
+        <receiver android:name=".Receiver.AlarmReceiverForCalendar">
 
         </receiver>
 
@@ -88,7 +84,7 @@
         <activity android:name=".DailyConsumptionActivity" />
 
         <service
-            android:name=".Services.CalendarIntentService"
+            android:name=".Services.CalendarService"
             android:exported="false" />
     </application>
 
