@@ -1,4 +1,4 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,12 +8,20 @@
         android:id="@+id/emptyList"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
+
         android:text="Aucun aliment"
         android:layout_marginTop="70dp"
         android:textAlignment="center"
         >
 
     </TextView>
+    <Button
+        android:id="@+id/sortBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:text="Trier par calories"/>
 
 
     <android.support.v7.widget.RecyclerView
@@ -25,4 +33,4 @@
 
 
 
-</FrameLayout>
+</RelativeLayout>

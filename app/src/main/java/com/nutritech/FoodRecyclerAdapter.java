@@ -32,14 +32,7 @@ public class FoodRecyclerAdapter extends RecyclerView.Adapter<FoodRecyclerAdapte
 
 
     private Integer[] tab_images_pour_la_liste = {
-            R.drawable.food_apple, R.drawable.food_apple,
-            R.drawable.food_apple,
-            R.drawable.food_apple,
-            R.drawable.food_apple,
-            R.drawable.food_apple,
-            R.drawable.food_apple,
-            R.drawable.food_apple,
-            R.drawable.food_apple,
+            R.drawable.meal
     };
 
     // Provide a reference to the views for each data item
@@ -99,14 +92,20 @@ public class FoodRecyclerAdapter extends RecyclerView.Adapter<FoodRecyclerAdapte
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         Food food = dataSet.get(position);
-        holder.textView.setText(food.getName());
+
         holder.textCal.setText(String.valueOf(round(food.getCalorie()*(food.getQuantite()/100))));
-        holder.imageView.setImageResource(tab_images_pour_la_liste[position]);
-        holder.textView.setText(dataSet.get(position).getName());
+        holder.imageView.setImageResource(tab_images_pour_la_liste[0]);
+        String foodTxt = dataSet.get(position).getName();
+
+        if (foodTxt.length() > 20) {
+            foodTxt = food.getName().substring(0, 20).concat("...");
+        }
+        holder.textView.setText(foodTxt);
 
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onClick(View v, int adapterPosition, boolean isLongClick) {
+                // TODO : Modify food activity
             }
         });
 
