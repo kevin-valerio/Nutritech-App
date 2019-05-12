@@ -1,5 +1,6 @@
 package com.nutritech.Fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -74,10 +75,13 @@ public class MonthlyGraphFragment extends Fragment {
         graph.getViewport().setMinY(0);
         graph.getViewport().setMaxY(100);
 
+
         graph.getViewport().setXAxisBoundsManual(true);
         graph.getViewport().setMinX(13);
         graph.getViewport().setMaxX(25);
 
+        series2.setColor(Color.parseColor("#e5def4"));
+        series2.setThickness(10);
         // enable scaling and scrolling
         graph.getViewport().setScalable(true);
         graph.getViewport().setScalableY(true);
