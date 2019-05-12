@@ -8,7 +8,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/retour"
@@ -16,65 +18,46 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="170dp"
-            android:orientation="vertical">
+        <fragment
+            android:id="@+id/monthlyGraphFragment"
+            android:name="com.nutritech.Fragments.MonthlyGraphFragment"
+            android:layout_width="292dp"
+            android:layout_height="187dp"
+            android:layout_marginLeft="260dp"
+            android:layout_marginTop="8dp" />
 
-            <LinearLayout
-                android:id="@+id/linearLayout2"
-                android:layout_width="match_parent"
-                android:layout_height="113dp"
-                android:layout_weight="1"
-                android:orientation="horizontal">
+        <fragment
+            android:id="@+id/weeklyGraphFragment"
+            android:name="com.nutritech.Fragments.WeeklyGraphFragment"
+            android:layout_width="262dp"
+            android:layout_height="191dp"
+            android:layout_marginTop="-190dp" />
 
-                <fragment
-                    android:id="@+id/weeklyGraphFragment"
-                    android:name="com.nutritech.Fragments.WeeklyGraphFragment"
-                    android:layout_width="362dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="10dp" />
+        <TextView
+            android:layout_width="537dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="15dp"
+            android:background="@color/primary_dark"
+            android:fontFamily="sans-serif-light"
+            android:text="Revue du coach :"
+            android:textColor="@color/white"
+            android:textSize="15dp" />
 
-                <fragment
-                    android:id="@+id/monthlyGraphFragment"
-                    android:name="com.nutritech.Fragments.MonthlyGraphFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="10dp" />
-
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="15dp"
-                android:background="@color/primary_dark"
-                android:fontFamily="sans-serif-light"
-                android:text="Revue du coach :"
-                android:textColor="@color/white"
-                android:textSize="15dp" />
-
-            <TextView
-                android:id="@+id/coachReview"
-                android:layout_width="match_parent"
-                android:layout_height="96dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginBottom="15dp"
-                android:background="@color/primary_dark"
-                android:fontFamily="sans-serif-light"
-                android:scrollbars="vertical"
-                android:textColor="@color/white"
-                android:textSize="15dp" />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/coachReview"
+            android:layout_width="536dp"
+            android:layout_height="58dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="15dp"
+            android:background="@color/primary_dark"
+            android:fontFamily="sans-serif-light"
+            android:scrollbars="vertical"
+            android:textColor="@color/white"
+            android:textSize="15dp" />
 
     </LinearLayout>
 

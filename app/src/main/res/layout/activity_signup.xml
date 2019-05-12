@@ -15,13 +15,18 @@
 
 
         <!--TODO : Changer ce logo !-->
-        <ImageView
-            android:layout_width="364dp"
-            android:layout_height="124dp"
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+
+            android:layout_height="72dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="24dp"
-            android:src="@mipmap/nutritech_logo"
-            app:srcCompat="@mipmap/nutritech_logo" />
+            android:elegantTextHeight="false"
+            android:text="@string/nutritech"
+            android:textAlignment="center"
+            android:textSize="36sp" />
+
 
         <!--  Name Label -->
 

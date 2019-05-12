@@ -1,5 +1,6 @@
 package com.nutritech.Fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -50,28 +51,18 @@ public class WeeklyGraphFragment extends Fragment {
 
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_monthly_graph, container, false);
-        initGraph(view);
-        return view;
-    }
-
-
-    public static void initGraph(View view){
+    public static void initGraph(View view, String title) {
         GraphView graph = view.findViewById(R.id.monthlyGraphFragment);
 
         LineGraphSeries series2 = new LineGraphSeries<>();
-        series2.appendData(new DataPoint(8,1800),false,100);
+        series2.appendData(new DataPoint(0, 0), false, 100);
         series2.appendData(new DataPoint(UserSingleton.getUser().getDateOfTheDayCalories(),UserSingleton.getUser().getKcalCurrent()),false,100);
         Log.d("Cal",Double.toString(UserSingleton.getUser().getKcalCurrent()));
         Log.d("Date",Integer.toString(UserSingleton.getUser().getDateOfTheDayCalories()));
 
         graph.addSeries(series2);
 
-        graph.setTitle("Evolution des calories");
+        graph.setTitle(title);
         series2.setTitle("Calories");
         graph.getLegendRenderer().setVisible(true);
         graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
@@ -88,5 +79,17 @@ public class WeeklyGraphFragment extends Fragment {
         // enable scaling and scrolling
         graph.getViewport().setScalable(true);
         graph.getViewport().setScalableY(true);
+
+        series2.setColor(Color.parseColor("#e5def4"));
+        series2.setThickness(10);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_monthly_graph, container, false);
+        initGraph(view, "Evolution des calories");
+        return view;
     }
 }

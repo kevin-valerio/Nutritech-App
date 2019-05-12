@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -26,44 +24,38 @@
                 android:name="com.nutritech.Fragments.WeeklyGraphFragment"
                 android:layout_width="match_parent"
                 android:layout_height="282dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginBottom="8dp"
                 android:layout_weight="1"
                 android:background="@color/primary_dark" />
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/textView4"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
 
-                <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@color/primary_dark"
+                android:fontFamily="sans-serif-light"
+                android:text="Revue du coach :"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
 
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="25dp"
-                    android:layout_marginEnd="15dp"
-                    android:layout_marginRight="15dp"
-                    android:background="@color/primary_dark"
-                    android:fontFamily="sans-serif-light"
-                    android:text="Revue du coach :"
-                    android:textColor="@color/white"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/coachReview"
-                    android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:layout_marginRight="15dp"
-                    android:background="@color/primary_dark"
-                    android:fontFamily="sans-serif-light"
-                    android:textColor="@color/white" />
-            </LinearLayout>
+            <TextView
+                android:id="@+id/coachReview"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@color/primary_dark"
+                android:fontFamily="sans-serif-light"
+                android:textColor="@color/white" />
 
         </LinearLayout>
     </ScrollView>
