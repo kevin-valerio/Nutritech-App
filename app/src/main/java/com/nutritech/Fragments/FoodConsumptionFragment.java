@@ -64,11 +64,10 @@ public class FoodConsumptionFragment extends Fragment implements RecyclerItemTou
 
         Button sortBtn = rootView.findViewById(R.id.sortBtn);
         sortBtn.setOnClickListener(v -> {
-           foodList.getDailyFood().sort((o1, o2) -> Math.toIntExact(o1.getCalorie() - o2.getCalorie()));
-            // clear old list
+            foodList.getDailyFood().sort((o1, o2) -> Math.toIntExact((o2.getCalorie() * (o2.getQuantite() / 100)) - o1.getCalorie() * (o1.getQuantite() / 100)));
             data.clear();
-           data.addAll(foodList.getDailyFood());
-           mAdapter.notifyDataSetChanged();
+            data.addAll(foodList.getDailyFood());
+            mAdapter.notifyDataSetChanged();
         });
 
 
@@ -80,13 +79,13 @@ public class FoodConsumptionFragment extends Fragment implements RecyclerItemTou
         layoutManager = new LinearLayoutManager(container.getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.addItemDecoration(new DividerItemDecoration(rootView.getContext(),DividerItemDecoration.VERTICAL));
+        recyclerView.addItemDecoration(new DividerItemDecoration(rootView.getContext(), DividerItemDecoration.VERTICAL));
 
         // specify an adapter (see also next example)
-        mAdapter = new FoodRecyclerAdapter(rootView.getContext(),this.data);
+        mAdapter = new FoodRecyclerAdapter(rootView.getContext(), this.data);
         recyclerView.setAdapter(mAdapter);
 
-        ItemTouchHelper.SimpleCallback itemTouchHelperCallBack = new RecyclerItemTouchHelper(0,ItemTouchHelper.LEFT,this);
+        ItemTouchHelper.SimpleCallback itemTouchHelperCallBack = new RecyclerItemTouchHelper(0, ItemTouchHelper.LEFT, this);
         new ItemTouchHelper(itemTouchHelperCallBack).attachToRecyclerView(recyclerView);
 
 
@@ -95,7 +94,7 @@ public class FoodConsumptionFragment extends Fragment implements RecyclerItemTou
 
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
-        if(viewHolder instanceof FoodRecyclerAdapter.MyViewHolder){
+        if (viewHolder instanceof FoodRecyclerAdapter.MyViewHolder) {
             String name = foodList.getDailyFood().get(viewHolder.getAdapterPosition()).getName();
             Food deletedFood = foodList.getDailyFood().get(viewHolder.getAdapterPosition());
 
@@ -119,14 +118,14 @@ public class FoodConsumptionFragment extends Fragment implements RecyclerItemTou
             @Override
             public void onChanged(@Nullable Calendar calendar) {
 
-              //  Log.d("RECEIVED",calendar.get(Calendar.DAY_OF_MONTH)+"/"+calendar.get(Calendar.MONTH)+"/"+calendar.get(Calendar.YEAR));
+                //  Log.d("RECEIVED",calendar.get(Calendar.DAY_OF_MONTH)+"/"+calendar.get(Calendar.MONTH)+"/"+calendar.get(Calendar.YEAR));
                 // clear old list
                 data.clear();
 
                 // if there is a food list update the data
-                if(getUser().getCalendarFoodList().containsKey(calendar.get(Calendar.DAY_OF_MONTH))){
+                if (getUser().getCalendarFoodList().containsKey(calendar.get(Calendar.DAY_OF_MONTH))) {
                     foodList = UserSingleton.getUser().getCalendarFoodList().get(calendar.get(Calendar.DAY_OF_MONTH));
-                     data.addAll(foodList.getDailyFood());
+                    data.addAll(foodList.getDailyFood());
 
                 }
                 // notify adapter
