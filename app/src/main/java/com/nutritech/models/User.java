@@ -32,10 +32,8 @@ public class User {
     private double kcalCurrent = 0;
 
     public User() {
-        //TODO : MOCK-UP à A SUPPRIMER
-
-        initDatas("a@a.aa", "a@a.aa", Goal.PERTE_DE_MASSE, 80, 180, 12, "Homme", "a@a.aa", "a@a.aa");
-
+ 
+         initDatas("","",Goal.MAINTIEN_DE_SON_POIDS, 70, 180, 0, "Homme", "", "");
     }
 
 
@@ -75,6 +73,7 @@ public class User {
             kcalObj += 300;
         else if (goal == Goal.PERTE_DE_MASSE)
             kcalObj -= 300;
+        kcalObj += 300;
         objGlucides = (int) (kcalObj * 0.4) / 4;
         objProteines = (int) (kcalObj * 0.3) / 4;
         objLipides = (int) (kcalObj * 0.3) / 9;

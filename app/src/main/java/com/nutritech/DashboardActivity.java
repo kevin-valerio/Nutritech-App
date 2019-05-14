@@ -96,6 +96,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
 
     private void initProgressBar() {
 
+
         int todaysCalories = Math.toIntExact(UserSingleton.getUser().getCalendarFoodList().get(Calendar.getInstance().get(Calendar.DAY_OF_MONTH)).getCalorie());
 
         this.progressBar = findViewById(R.id.progressBar);
@@ -290,8 +291,8 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         /* Set the alarm to start at 15:00 */
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, 7);
-        calendar.set(Calendar.MINUTE, 6);
+        calendar.set(Calendar.HOUR_OF_DAY, 17);
+        calendar.set(Calendar.MINUTE, 05);
 
         // If the hour is past, add one day
         if(calendar.before(Calendar.getInstance())){

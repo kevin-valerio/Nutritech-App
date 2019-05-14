@@ -28,6 +28,7 @@ import com.nutritech.models.UserSingleton;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import static android.app.AlarmManager.INTERVAL_DAY;
@@ -62,10 +63,10 @@ public class AlarmReceiverForCalendar extends BroadcastReceiver {
         intent.setType("vnd.android.cursor.item/event");
         intent.putExtra(CalendarContract.Events.TITLE, "Bilan de la journée");
         intent.putExtra(CalendarContract.Events.EVENT_LOCATION, UserSingleton.getUser().getKcalCurrent()+"kcal / "+UserSingleton.getUser().getKcalObj()+" kcal");
-        intent.putExtra(CalendarContract.Events.DESCRIPTION, "Download Examples");
 
-
-        GregorianCalendar calDate = new GregorianCalendar(2019, 05, 02);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        GregorianCalendar calDate = new GregorianCalendar(2019, 04, 13);
         intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME,
                 calDate.getTimeInMillis());
         intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME,
